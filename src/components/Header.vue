@@ -53,15 +53,14 @@ header
     .logo
         width: $height
         height: 100%
-        background: green
         flex: 0 0 auto
     .navigation
         flex: 1 1 auto
-        background: red
         display: flex
         justify-content: flex-end
 
         #main-menu
+            padding-right: $height
             flex: 1 0 auto
         .social
             flex: 0 0 auto
