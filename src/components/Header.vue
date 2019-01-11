@@ -22,7 +22,7 @@ export default {
             div.navigation
                 nav#main-menu
                     ul
-                        li( v-for = "(parent, i) in menuStructure" :key = "parent.ID" )
+                        li.title( v-for = "(parent, i) in menuStructure" :key = "parent.ID" )
                             router-link( :to = "parent.url" ) {{ parent.title }}
 
                             ul( v-if = "parent.children.length > 0")
@@ -44,6 +44,7 @@ export default {
 $height: 100px
 header
     padding: 10px
+    background-color: $color--primary
 
 .inner-section
     height: $height
@@ -78,10 +79,16 @@ li
     margin: $size/4
     position: relative
     white-space: nowrap
+    text-transform: uppercase
+    font-weight: bold
 
     a
         display: block
         text-align: right
+        color: white
+
+        &:hover
+            color: $color--alert
     svg
         width: $size
         height: $size
@@ -99,11 +106,25 @@ li
         display: block
         position: absolute
         z-index: 5
+
+        li
+            text-transform: none
+            font-weight: 100
+
     &:hover > ul
         opacity: 1
         visibility: visible
         transform: translateY(0)
 
+.social
+    a svg
+        filter: drop-shadow(0 0 0 rgba(0,0,0,0))
+        transition: filter .2s
+    a:hover
+        svg
+            filter: drop-shadow(0px 0px 5px #{rgba(white, .5)})
+.router-link-active, .router-link-exact-active 
+    color: $color--alert
 
 </style>
 

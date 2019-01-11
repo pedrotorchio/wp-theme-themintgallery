@@ -3,11 +3,21 @@
 body
     margin: 0
     font-size: $size--font-text
-
+    color: $color--text
+    font-family: 'Thasadith', sans-serif
 a
     text-decoration: none
+    color: $color--primary
+    transition: color .5s
+
+    &:hover
+        color: $color--alert
 
 .inner-section
     max-width: $max-width
     margin-left: auto
     margin-right: auto
+
+.title
+    letter-spacing: 0.1em
+    line-height: 2em
