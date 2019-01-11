@@ -1,5 +1,5 @@
 <script>
-const menuStructure = __INITIAL_DATA__.menuStructure;
+const menuStructure = __INITIAL_DATA__.menuStructure || [];
 
 export default {
     name: 'AppHeader',
