@@ -66,18 +66,45 @@ header
         .social
             flex: 0 0 auto
 
-            ul
-                line-height: $height
-                height: $height
-            li
-                $size: 32px
-                display: inline-block
-                margin: 0 $size/4
+ul
+    display: flex
+    align-items: center
+    justify-content: flex-end
+    height: 100%
+    z-index: 55
+    font-size: $size--font-text
 
-                a
-                    display: block
-                svg
-                    width: $size
-                    height: $size
+li
+    $size: $size--font-text * 2
+    margin: $size/4
+    position: relative
+    white-space: nowrap
+
+    a
+        display: block
+        text-align: right
+    svg
+        width: $size
+        height: $size
+
+    &>ul
+        height: auto
+        opacity: 0
+        right: 0
+        top: 1em
+        padding-top: $size/2
+        visibility: hidden
+        transform: translateY(-#{$size--font-text})
+        transition-property: opacity, transform
+        transition-duration: .2s
+        display: block
+        position: absolute
+        z-index: 5
+    &:hover > ul
+        opacity: 1
+        visibility: visible
+        transform: translateY(0)
+
+
 </style>
 
