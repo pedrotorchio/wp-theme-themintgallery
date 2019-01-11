@@ -6,11 +6,14 @@
     "start": "npm run serve -- --port 9876",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "generate-svg": "npx vsvg -s ./src/assets/svg -t ./src/components/svg --es6 --svgo ./svgo.config.js"
   },
   "dependencies": {
+    "css-reset-and-normalize": "^1.0.1",
     "vue": "^2.5.21",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vue-svgicon": "^3.2.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.3.0",
