@@ -20,7 +20,7 @@ export default {
                         li( v-for = "(parent, i) in menuStructure" :key = "parent.ID" )
                             router-link( :to = "parent.url" ) {{ parent.title }}
 
-                            ul( v-if = "parent.children.length > 0")
+                            ul.dropdown( v-if = "parent.children.length > 0")
                                 li( v-for = "(child, i) in parent.children" :key = "child.ID" )
                                     router-link( :to = "child.url" ) {{ child.title }}
 
@@ -51,17 +51,58 @@ header
     .logo
         width: $height
         height: 100%
-        background: green
         flex: 0 0 auto
     .navigation
         flex: 1 1 auto
-        background: red
         display: flex
         justify-content: flex-end
 
-        #main-menu
-            flex: 1 0 auto
-        .social
-            flex: 0 0 auto
+#main-menu
+    flex: 1 0 auto
+    text-align: right
+    padding-right: 32px
+
+.social
+    flex: 0 0 auto
+
+
+ul
+    height: $height
+    display: flex
+    align-items: center
+    justify-content: flex-end
+    top: 40%
+    top: calc(50% - .5em)
+li
+    $size: 32px
+    display: inline-block
+    margin: 0 $size/4
+    position: relative
+    
+    &>ul
+        position: absolute
+        right: 0
+        top: 0
+        visibility: hidden
+        opacity: 0
+        transition-property: opacity, transform
+        transition-duration: .2s
+        transform: translateY(-#{$size--font-text})
+        display: block
+        padding-top: $size--font-text * 2
+
+    &:hover
+        &>ul
+            transform: translateY(0)
+            visibility: visible
+            opacity: 1
+
+    a
+        display: block
+        white-space: nowrap
+    svg
+        width: $size
+        height: $size
+
 </style>
 
