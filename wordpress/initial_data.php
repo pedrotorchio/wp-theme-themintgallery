@@ -27,7 +27,8 @@ function register_initial_data() {
           'themint/app.js', // vue script handle defined in wp_register_script.
           '__INITIAL_DATA__', // javascript object that will made availabe to Vue.
           array(
-            'menuStructure' => mint_getNavStructure('Main Menu')
+            'mainMenuStructure' => mint_getNavStructure('Main Menu'),
+            'socialMenuStructure' => mint_getNavStructure('Social Menu')
           )
         );
 
