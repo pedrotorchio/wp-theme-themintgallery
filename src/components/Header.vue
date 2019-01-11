@@ -2,6 +2,11 @@
 const menuStructure = __INITIAL_DATA__.mainMenuStructure || [];
 const socialStructure = __INITIAL_DATA__.socialMenuStructure || [];
 
+import '@/components/svg/Facebook'
+import '@/components/svg/Twitter'
+import '@/components/svg/Behance'
+import '@/components/svg/Instagram'
+
 export default {
     name: 'AppHeader',
     data: () => ({
@@ -27,11 +32,8 @@ export default {
                 nav.social
                     ul
                         li( v-for = "(parent, i) in socialStructure" :key = "parent.ID" )
-                            router-link( :to = "parent.url" ) {{ parent.title }}
-
-                            ul( v-if = "parent.children.length > 0")
-                                li( v-for = "(child, i) in parent.children" :key = "child.ID" )
-                                    router-link( :to = "child.url" )
+                            a( :href = "parent.url" )
+                                svgicon( :name = "parent.title" :original = "true" )
                                         
 
 </template>
@@ -63,5 +65,19 @@ header
             flex: 1 0 auto
         .social
             flex: 0 0 auto
+
+            ul
+                line-height: $height
+                height: $height
+            li
+                $size: 32px
+                display: inline-block
+                margin: 0 $size/4
+
+                a
+                    display: block
+                svg
+                    width: $size
+                    height: $size
 </style>
 
