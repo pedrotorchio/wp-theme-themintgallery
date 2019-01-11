@@ -21,3 +21,56 @@ a
 .title
     letter-spacing: 0.1em
     line-height: 2em
+
+ul.menu
+    display: flex
+    align-items: center
+    justify-content: flex-end
+    font-size: $size--font-text
+
+    li
+        $size: $size--font-text * 2
+        margin: $size/4
+        position: relative
+        white-space: nowrap
+        text-transform: uppercase
+        font-weight: bold
+
+        a
+            display: block
+            text-align: right
+            color: white
+
+            &:hover
+                color: $color--alert
+        //dropdown
+        &>ul 
+            height: auto
+            opacity: 0
+            right: 0
+            top: 1em
+            padding-top: $size/2
+            visibility: hidden
+            transform: translateY(-#{$size--font-text})
+            transition-property: opacity, transform
+            transition-duration: .2s
+            display: block
+            position: absolute
+            z-index: 5
+
+            li
+                text-transform: none
+                font-weight: 100
+
+        &:hover > ul
+            opacity: 1
+            visibility: visible
+            transform: translateY(0)
+
+.social
+    a svg
+        filter: drop-shadow(0 0 0 rgba(0,0,0,0))
+        transition: filter .2s
+    a:hover
+        svg
+            filter: drop-shadow(0px 0px 5px #{rgba(white, .5)})

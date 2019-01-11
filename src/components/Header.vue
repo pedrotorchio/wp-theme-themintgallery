@@ -21,7 +21,7 @@ export default {
             div.logo
             div.navigation
                 nav#main-menu
-                    ul
+                    ul.menu
                         li.title( v-for = "(parent, i) in menuStructure" :key = "parent.ID" )
                             router-link( :to = "parent.url" ) {{ parent.title }}
 
@@ -30,7 +30,7 @@ export default {
                                     router-link( :to = "child.url" ) {{ child.title }}
 
                 nav.social
-                    ul
+                    ul.menu
                         li( v-for = "(parent, i) in socialStructure" :key = "parent.ID" )
                             a( :href = "parent.url" )
                                 svgicon( :name = "parent.title" :original = "true" )
@@ -67,62 +67,14 @@ header
             flex: 0 0 auto
 
 ul
-    display: flex
-    align-items: center
-    justify-content: flex-end
     height: 100%
-    z-index: 55
-    font-size: $size--font-text
 
-li
-    $size: $size--font-text * 2
-    margin: $size/4
-    position: relative
-    white-space: nowrap
-    text-transform: uppercase
-    font-weight: bold
 
-    a
-        display: block
-        text-align: right
-        color: white
-
-        &:hover
-            color: $color--alert
     svg
+        $size: 32px
         width: $size
         height: $size
 
-    &>ul
-        height: auto
-        opacity: 0
-        right: 0
-        top: 1em
-        padding-top: $size/2
-        visibility: hidden
-        transform: translateY(-#{$size--font-text})
-        transition-property: opacity, transform
-        transition-duration: .2s
-        display: block
-        position: absolute
-        z-index: 5
-
-        li
-            text-transform: none
-            font-weight: 100
-
-    &:hover > ul
-        opacity: 1
-        visibility: visible
-        transform: translateY(0)
-
-.social
-    a svg
-        filter: drop-shadow(0 0 0 rgba(0,0,0,0))
-        transition: filter .2s
-    a:hover
-        svg
-            filter: drop-shadow(0px 0px 5px #{rgba(white, .5)})
 .router-link-active, .router-link-exact-active 
     color: $color--alert
 
