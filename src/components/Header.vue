@@ -16,7 +16,7 @@ export default {
 }
 </script>
 <template lang="pug">
-    header#main-header
+    header.section
         div.inner-section
             div.logo
             div.navigation
@@ -63,17 +63,18 @@ header
         #main-menu
             padding-right: $height
             flex: 1 0 auto
+            a
+                font-weight: 100
         .social
             flex: 0 0 auto
 
 ul
     height: 100%
 
+    li ul
+        background-color: rgba($color--primary, .95)
+        border-radius: 2px
 
-    svg
-        $size: 32px
-        width: $size
-        height: $size
 
 .router-link-active, .router-link-exact-active 
     color: $color--alert

@@ -48,7 +48,7 @@ ul.menu
             height: auto
             opacity: 0
             right: 0
-            top: 1em
+            top: 1.5em
             padding-top: $size/2
             visibility: hidden
             transform: translateY(-#{$size--font-text})
@@ -71,6 +71,23 @@ ul.menu
     a svg
         filter: drop-shadow(0 0 0 rgba(0,0,0,0))
         transition: filter .2s
+
+        $size: 32px
+        width: $size
+        height: $size
+
+    &.wires svg
+        color: white
+        stroke-width: 4px
+        
+        .wire-paint
+            fill: currentColor
+        .wire-remove
+            display: none
+
     a:hover
         svg
             filter: drop-shadow(0px 0px 5px #{rgba(white, .5)})
+
+section, .section
+    padding: 100px 0
