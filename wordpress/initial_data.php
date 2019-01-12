@@ -28,7 +28,9 @@ function register_initial_data() {
           '__INITIAL_DATA__', // javascript object that will made availabe to Vue.
           array(
             'mainMenuStructure' => mint_getNavStructure('Main Menu'),
-            'socialMenuStructure' => mint_getNavStructure('Social Menu')
+            'socialMenuStructure' => mint_getNavStructure('Social Menu'),
+            'copyrights' => get_option('copyrights'),
+            'copyrights-url' => get_option('copyrights-url')
           )
         );
 

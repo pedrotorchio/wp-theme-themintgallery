@@ -16,13 +16,13 @@ export default {
 }
 </script>
 <template lang="pug">
-    header#main-header
+    header.section
         div.inner-section
             div.logo
             div.navigation
                 nav#main-menu
-                    ul
-                        li( v-for = "(parent, i) in menuStructure" :key = "parent.ID" )
+                    ul.menu
+                        li.title( v-for = "(parent, i) in menuStructure" :key = "parent.ID" )
                             router-link( :to = "parent.url" ) {{ parent.title }}
 
                             ul( v-if = "parent.children.length > 0")
@@ -30,7 +30,7 @@ export default {
                                     router-link( :to = "child.url" ) {{ child.title }}
 
                 nav.social
-                    ul
+                    ul.menu
                         li( v-for = "(parent, i) in socialStructure" :key = "parent.ID" )
                             a( :href = "parent.url" )
                                 svgicon( :name = "parent.title" :original = "true" )
@@ -44,6 +44,7 @@ export default {
 $height: 100px
 header
     padding: 10px
+    background-color: $color--primary
 
 .inner-section
     height: $height
@@ -53,31 +54,30 @@ header
     .logo
         width: $height
         height: 100%
-        background: green
         flex: 0 0 auto
     .navigation
         flex: 1 1 auto
-        background: red
         display: flex
         justify-content: flex-end
 
         #main-menu
+            padding-right: $height
             flex: 1 0 auto
+            a
+                font-weight: 100
         .social
             flex: 0 0 auto
 
-            ul
-                line-height: $height
-                height: $height
-            li
-                $size: 32px
-                display: inline-block
-                margin: 0 $size/4
+ul
+    height: 100%
 
-                a
-                    display: block
-                svg
-                    width: $size
-                    height: $size
+    li ul
+        background-color: rgba($color--primary, .95)
+        border-radius: 2px
+
+
+.router-link-active, .router-link-exact-active 
+    color: $color--alert
+
 </style>
 
