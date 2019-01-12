@@ -12,7 +12,12 @@ export default {
     data: () => ({
         menuStructure,
         socialStructure
-    })
+    }),
+    methods: {
+        getRelativePath(absolute){
+            return new URL(absolute).pathname
+        }
+    }
 }
 </script>
 <template lang="pug">
@@ -23,11 +28,11 @@ export default {
                 nav#main-menu
                     ul.menu
                         li.title( v-for = "(parent, i) in menuStructure" :key = "parent.ID" )
-                            router-link( :to = "parent.url" ) {{ parent.title }}
+                            router-link( :to = "getRelativePath(parent.url)" ) {{ parent.title }}
 
                             ul( v-if = "parent.children.length > 0")
                                 li( v-for = "(child, i) in parent.children" :key = "child.ID" )
-                                    router-link( :to = "child.url" ) {{ child.title }}
+                                    router-link( :to = "getRelativePath(child.url)" ) {{ child.title }}
 
                 nav.social
                     ul.menu
