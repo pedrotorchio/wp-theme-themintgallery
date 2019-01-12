@@ -4,6 +4,7 @@ import router from "./router";
 
 import '@/plugins/svg-icons'
 import '@/plugins/root-id'
+import '@/plugins/mint-fetcher'
 
 Vue.config.productionTip = false;
 
