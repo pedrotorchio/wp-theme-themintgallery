@@ -13,7 +13,7 @@ function editArtistData() {
                 
                 $data = CFS()->get(false);
 
-                $gallery = array_map(function ($piece) use ($data) {
+                $galleryExtraction = function ($piece) use ($data) {
 
                     $piece['images'] = array_map(function ($imageData) use ($data) {
                         
@@ -26,8 +26,13 @@ function editArtistData() {
                     }, $piece['images']);
 
                     return $piece;
-                }, $data['gallery']);
-                $data['gallery'] = $gallery;
+                };
+
+                $data['gallery'] = array_map($galleryExtraction, $data['gallery']);
+
+                foreach ($data['themed_gallery'] as &$themedGallery) {
+                    $themedGallery['pieces'] = array_map($galleryExtraction, $themedGallery['pieces']);
+                }
                 
                 return $data;
             },
