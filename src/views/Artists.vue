@@ -7,7 +7,7 @@ export default {
     }),
     methods: {
         async fetchData() {
-            this.artists = this.$fetcher.getArtists()
+            this.artists = await this.$fetcher.getArtists()
         }
     },
     created() {

@@ -12,7 +12,10 @@ export default class MintFetcher {
     }
 
     async getArtists() {
-        return (__INITIAL_DATA__.artists || this.fetcher.get('/artists')).map(TypeMaker.makeArtist);
+        const data = __INITIAL_DATA__.artists || (await this.fetcher.get('/artists'));
+        
+        return data
+                    .map(TypeMaker.makeArtist);
     }
     
 }
