@@ -6,9 +6,13 @@ import '@/components/svg/Facebook'
 import '@/components/svg/Twitter'
 import '@/components/svg/Behance'
 import '@/components/svg/Instagram'
+import '@/components/svg/logo-mini'
+
+import Social from '@/components/Social'
 
 export default {
     name: 'AppHeader',
+    components: { Social },
     data: () => ({
         menuStructure,
         socialStructure
@@ -24,6 +28,8 @@ export default {
     header.section
         div.inner-section
             div.logo
+                router-link( to = "/" )
+                    svgicon( name = "logo-mini" :original = "true" )
             div.navigation
                 nav#main-menu
                     ul.menu
@@ -34,11 +40,7 @@ export default {
                                 li( v-for = "(child, i) in parent.children" :key = "child.ID" )
                                     router-link( :to = "getRelativePath(child.url)" ) {{ child.title }}
 
-                nav.social
-                    ul.menu
-                        li( v-for = "(parent, i) in socialStructure" :key = "parent.ID" )
-                            a( :href = "parent.url" )
-                                svgicon( :name = "parent.title" :original = "true" )
+                social( :data = "socialStructure" :wires = "true" )
                                         
 
 </template>
@@ -60,6 +62,11 @@ header
         width: $height
         height: 100%
         flex: 0 0 auto
+
+        svg
+            height: 100%
+            width: auto
+
     .navigation
         flex: 1 1 auto
         display: flex
@@ -72,10 +79,8 @@ header
                 font-weight: 100
         .social
             flex: 0 0 auto
-            svg
-                $size: 24px !important
-                width: $size
-                height: $size
+            align-self: center
+            font-size: 24px
 
 ul
     height: 100%

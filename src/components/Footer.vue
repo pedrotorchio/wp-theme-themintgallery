@@ -7,8 +7,12 @@ import '@/components/svg/Facebook'
 import '@/components/svg/Twitter'
 import '@/components/svg/Behance'
 import '@/components/svg/Instagram'
+import '@/components/svg/logo'
+
+import Social from '@/components/Social'
 
 export default {
+    components: { Social },
     data: () => ({
         socialStructure,
         copyrights,
@@ -20,13 +24,10 @@ export default {
     footer
         div.inner-section
             div#footer-logo-container
+                svgicon( name = "logo" :original = "true" )
             div.copyright
                 a( :href = "copyrightsUrl" ) {{ copyrights }}
-            nav.social.wires
-                ul.menu
-                    li( v-for = "(parent, i) in socialStructure" :key = "parent.ID" )
-                        a( :href = "parent.url" )
-                            svgicon( :name = "parent.title" :fill = "false" color = "white")
+            social( :data = "socialStructure" :wires = "true" )
 </template>
 <style lang="sass" scoped>
 @import '~@/styles/config'
@@ -45,6 +46,7 @@ footer
     text-transform: uppercase
     color: white
     text-align: center
+    font-size: 12px
 
     &:hover
         color: $color--alert
@@ -52,6 +54,10 @@ footer
 #footer-logo-container
     height: 250px
     margin-bottom: 50px
+    text-align: center
+    svg
+        height: 100%
+
 
 
 </style>
