@@ -3,6 +3,7 @@ export default class Artist {
         this.name = ''
         this.profilePicture = null
         this.bio = ''
+        this.slug = ''
 
         this.themedGalleries = []
         this.gallery = []

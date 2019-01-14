@@ -4,10 +4,13 @@ import Gallery from './Gallery'
 import ThemedGallery from './ThemedGallery'
 import Piece from './Piece'
 
+import slugify from 'slugify'
+
 export function makeArtist(wpData) {
     let artist = new Artist()
         artist.name = wpData.title.rendered
         artist.bio = wpData.acf.bio
+        artist.slug = wpData.slug || slugify (artist.name)
                 
         if (wpData.acf.profile_picture)
             artist.profilePicture = makeImage(wpData.acf.profile_picture)
