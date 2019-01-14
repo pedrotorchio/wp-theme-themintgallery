@@ -72,6 +72,10 @@ header
                 font-weight: 100
         .social
             flex: 0 0 auto
+            svg
+                $size: 24px !important
+                width: $size
+                height: $size
 
 ul
     height: 100%
