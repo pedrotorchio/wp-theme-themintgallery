@@ -4,7 +4,15 @@ add_action( 'rest_api_init', 'editArtistData' );
 
 function editArtistData() {
     // Add the plaintext content to GET requests for individual posts
-
+    register_rest_field(
+        'artists',
+        'featured_image',
+        array(
+            'get_callback' => function($object, $field_name, $request) {
+                return wp_prepare_attachment_for_js($object['featured_media']);
+           }
+        )
+        );
     register_rest_field(
         'artists',
         'CFS',
