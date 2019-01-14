@@ -12,8 +12,11 @@ export function makeArtist(wpData) {
         artist.bio = wpData.acf.bio
         artist.slug = wpData.slug || slugify (artist.name)
                 
-        if (wpData.featured)
-            artist.featured = makeImage(wpData.featured)
+        if (wpData.featured_image)
+            artist.featured = makeImage(wpData.featured_image)
+        
+        if (wpData.acf.signature_svg)
+            artist.signatureSVG = makeImage(wpData.acf.signature_svg, false)
 
         if (wpData.acf.profile_picture)
             artist.profilePicture = makeImage(wpData.acf.profile_picture)
@@ -57,7 +60,7 @@ export function makePiece(wpData){
 export function makeBoolean(wpData) {
     return Boolean(wpData) && wpData != 0
 }
-export function makeImage(wpData) {
+export function makeImage(wpData, sizes = true) {
 
     let image = new Image()
         image.url = new URL(wpData.url)
@@ -68,13 +71,13 @@ export function makeImage(wpData) {
         image.height = wpData.height || -1
         image.orientation = wpData.orientation || 'landscape'
 
-        if (wpData.sizes) {
+        if (sizes && wpData.sizes) {
             
            Object
                 .entries(wpData.sizes)
                 .forEach( ([size, data]) => {
                     
-                    image.sizes[size] = makeImage(data)
+                    image.sizes[size] = makeImage(data, false)
                 })
         }
 

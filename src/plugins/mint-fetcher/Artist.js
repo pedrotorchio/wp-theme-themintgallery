@@ -7,5 +7,6 @@ export default class Artist {
         this.featured = null
         this.themedGalleries = []
         this.gallery = []
+        this.signatureSVG = null
     }
 }
