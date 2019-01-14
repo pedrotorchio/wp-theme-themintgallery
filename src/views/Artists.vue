@@ -9,6 +9,12 @@ export default {
     methods: {
         async fetchData() {
             this.artists = await this.$fetcher.getArtists()
+        },
+        getArtistRoute(artist) {
+            return { 
+                name: 'Artist',
+                params: { slug: artist.slug }
+            }
         }
     },
     created() {
@@ -17,9 +23,9 @@ export default {
 }
 </script>
 <template lang="pug">
-    div
+    div.inner-section
         div.preview-container( v-for = "(artist, i) in artists" )
-            preview( :artist = "artist" )
+            preview( :artist = "artist" @click.native = "$router.push(getArtistRoute(artist))" )
 </template>
 <style lang="sass" scoped>
 @import '~@/styles/config'

@@ -15,7 +15,7 @@ export default new Router({
 
     { path: '/artists', component: TransparentView, children: [
       { path: '', name: 'Artists', component: asyncView('Artists') },
-      { path: ':slug', component: asyncView('Artist') }
+      { path: ':slug', name: 'Artist', component: asyncView('Artist') }
     ]}
   ]
 });
