@@ -12,6 +12,9 @@ export function makeArtist(wpData) {
         artist.bio = wpData.acf.bio
         artist.slug = wpData.slug || slugify (artist.name)
                 
+        if (wpData.featured)
+            artist.featured = makeImage(wpData.featured)
+
         if (wpData.acf.profile_picture)
             artist.profilePicture = makeImage(wpData.acf.profile_picture)
             
