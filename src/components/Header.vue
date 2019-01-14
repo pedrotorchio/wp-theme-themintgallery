@@ -48,18 +48,16 @@ export default {
 <style lang="sass" scoped>
 @import '~@/styles/config'
 
-$height: 100px
 header
-    padding: 10px
+    padding: 0
     background-color: $color--primary
 
 .inner-section
-    height: $height
+    height: 100%
     display: flex
     align-items: stretch
     
     .logo
-        width: $height
         height: 100%
         flex: 0 0 auto
 
@@ -73,7 +71,7 @@ header
         justify-content: flex-end
 
         #main-menu
-            padding-right: $height
+            padding-right: 100px
             flex: 1 0 auto
             a
                 font-weight: 100
