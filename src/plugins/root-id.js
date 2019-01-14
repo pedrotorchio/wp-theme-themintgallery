@@ -5,7 +5,7 @@ Vue.use({
         Vue.mixin({
             mounted() {
                 if (this.$options.name && !this.$el.id)
-                    this.$el.id = `${this.$options.name}-root`
+                    this.$el.classList.add(`${this.$options.name}-root`);
             }
         })
     }
