@@ -10,7 +10,7 @@ export default {
 }
 </script>
 <template lang="pug">
-    div
+    div( :id = "gallery.slug" )
         h4 {{ gallery.theme }}
         gallery( :gallery = "gallery.gallery" )
 </template>

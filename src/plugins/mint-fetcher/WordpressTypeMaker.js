@@ -18,7 +18,7 @@ export function makeArtist(wpData) {
         // artist = makeBase(artist, wpData)
         artist.name = wpData.title.rendered
         artist.bio = wpData.acf.bio
-        artist.slug = wpData.slug || slugify (artist.name)
+        artist.slug = wpData.slug || slugify (artist.name, { lower: true })
                 
         if (wpData.featured_image)
             artist.featured = makeImage(wpData.featured_image)
@@ -40,6 +40,8 @@ export function makeThemedGallery(wpData) {
     
     let tg = new ThemedGallery();
         tg = makeBase(tg, wpData)
+        
+        tg.slug = slugify(wpData.theme, { lower: true })
         tg.theme = wpData.theme
         tg.gallery = makeGallery(wpData.pieces)
 
