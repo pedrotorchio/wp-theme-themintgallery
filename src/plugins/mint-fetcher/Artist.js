@@ -10,5 +10,6 @@ export default class Artist extends Base {
         this.themedGalleries = []
         this.gallery = []
         this.signatureSVG = null
+        this.aditionalSections = []
     }
 }
