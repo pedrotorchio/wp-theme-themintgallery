@@ -11,6 +11,9 @@ Vue.config.productionTip = false;
 import 'viewerjs/dist/viewer.css'
 import Viewer from 'v-viewer'
 
+import SmoothScroll from 'smooth-scroll'
+new SmoothScroll('a[href*="#"]');
+
 Vue.use(Viewer)
 
 new Vue({
