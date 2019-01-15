@@ -9,16 +9,19 @@ export default class MintFetcher {
     }
 
     async getArtists() {
-        let artists = Store.artists.length > 0 ? Store.artists.length : false;
+        // has artists stored
+        let storeArtists = Store.artists && Store.artists.length > 0 ? Store.artists : false;
 
-        const data = __INITIAL_DATA__.artists || artists || (await this.fetcher.get('/artists'));
-        
-        artists = data
+        if (!storeArtists) {
+            // has artists stored OR from backend OR fetch
+            const raw = __INITIAL_DATA__.artists || (await this.fetcher.get('/artists'));
+            const artists = raw
                     .map(TypeMaker.makeArtist);
+            
+            Store.artists = artists;
+        }
         
-        Store.artists = artists;
-
-        return artists;
+        return Store.artists;
     }
     async getArtist(slug) {
         let artists = await this.getArtists(); 
