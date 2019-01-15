@@ -23,7 +23,7 @@ export default {
                 h4.title.hover-phantom-effect {{ piece.title }}
                 p.dimensions.hover-phantom-effect {{ piece.dimensions }}
                 p.type.hover-phantom-effect {{ piece.type }}
-                strong( v-if = "piece.isSoldOut" ) SOLD
+                strong.hover-phantom-effect( v-if = "piece.isSoldOut" ) SOLD
         
 
 </template>
@@ -46,8 +46,11 @@ export default {
         p
             font-size: $size--font-text
 
+
+        
         strong
-            color: maroon
+            color: crimson
+
 
         .title
             transition-delay: 0
