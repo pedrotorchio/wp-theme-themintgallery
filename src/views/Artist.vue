@@ -2,10 +2,11 @@
 import Artist from '@/plugins/mint-fetcher/Artist'
 import HeroSection from '@/components/artistView/HeroSection';
 import BioSection from '@/components/artistView/BioSection';
+import GallerySection from '@/components/artistView/GallerySection';
 
 export default {
     name: 'Artist',
-    components: { HeroSection, BioSection },
+    components: { HeroSection, BioSection, GallerySection },
     props: {
         slug: {
             type: String,
@@ -32,6 +33,7 @@ export default {
     main
         hero-section( v-if = "artist" :artist = "artist" )
         bio-section.inner-section( v-if = "artist" :artist = "artist" )
+        gallery-section.inner-section( v-if = "artist" :gallery = "artist.gallery" )
         
                 
 </template>

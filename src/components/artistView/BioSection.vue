@@ -25,7 +25,7 @@ export default {
         lazy-image.img( 
             :src-placeholder = "profilePicture.placeholder" 
             :src="profilePicture.medium" )
-            h3 {{ artist.name }}
+            h3.hover-phantom-effect {{ artist.name }}
         div.text( v-html = "artist.bio" )
 </template>
 
@@ -38,30 +38,17 @@ export default {
     $space: 2em
     margin-right: $space
     margin-bottom: $space/2
-    .caption
-        h3
-            transition-property: transform, filter, opacity
-            transition-duration: 4s
-            transition-timing-function: cubic-bezier(0, 1.11, 0.4, 0.98)
-            color: white
-            opacity: 0
-            transform: translateX(-60px)
-            filter: blur(5px)
-            position: absolute
-            bottom: 1em
-            text-align: center
-            width: 100%
 
-    .caption:hover
-        h3
-            filter: blur(0)
-            opacity: 1
-            transform: translateY(0px)
+    /deep/ h3
+        bottom: 1em
+        text-align: center
+    
 .text
     font-size: 18px
     line-height: 2em
 
     /deep/ p
+        text-align: justify
         margin-bottom: 1em
         text-indent: 4em
 
