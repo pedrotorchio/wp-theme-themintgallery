@@ -1,5 +1,7 @@
-export default class Artist {
+import Base from './Base'
+export default class Artist extends Base {
     constructor() {
+        super()
         this.name = ''
         this.profilePicture = null
         this.bio = ''

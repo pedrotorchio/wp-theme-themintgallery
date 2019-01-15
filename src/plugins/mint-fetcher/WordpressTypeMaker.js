@@ -6,8 +6,16 @@ import Piece from './Piece'
 
 import slugify from 'slugify'
 
+export function makeBase(model, wpData) {
+    
+    if (wpData.id)
+        model.id = wpData.id
+
+    return model
+}
 export function makeArtist(wpData) {
     let artist = new Artist()
+        // artist = makeBase(artist, wpData)
         artist.name = wpData.title.rendered
         artist.bio = wpData.acf.bio
         artist.slug = wpData.slug || slugify (artist.name)
@@ -31,6 +39,7 @@ export function makeArtist(wpData) {
 export function makeThemedGallery(wpData) {
     
     let tg = new ThemedGallery();
+        tg = makeBase(tg, wpData)
         tg.theme = wpData.theme
         tg.gallery = makeGallery(wpData.pieces)
 
@@ -39,6 +48,7 @@ export function makeThemedGallery(wpData) {
 export function makeGallery(wpData) {
 
     let gallery = new Gallery();
+        gallery = makeBase(gallery, wpData)
         gallery.pieces = wpData.map(makePiece);
 
     return gallery
@@ -46,6 +56,7 @@ export function makeGallery(wpData) {
 export function makePiece(wpData){
 
     let piece = new Piece();
+        piece = makeBase(piece, wpData)
         piece.title = wpData.title;
         piece.type = wpData.type;
         piece.dimensions = wpData.dimensions;
@@ -63,6 +74,7 @@ export function makeBoolean(wpData) {
 export function makeImage(wpData, sizes = true) {
 
     let image = new Image()
+        image = makeBase(image, wpData)
         image.url = new URL(wpData.url)
         image.title = wpData.title || ''
         image.alt = wpData.alt || image.title

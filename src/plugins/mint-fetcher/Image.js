@@ -1,5 +1,8 @@
-export default class Image {
+import Base from './Base'
+
+export default class Image extends Base{
     constructor() {
+        super()
         this.url = null
         this.sizes = {}
         this.title = ''

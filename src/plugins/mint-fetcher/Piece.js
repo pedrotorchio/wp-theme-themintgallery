@@ -1,5 +1,8 @@
-export default class Piece {
+import Base from './Base'
+
+export default class Piece extends Base {
     constructor() {
+        super()
         this.title = '';
         this.type = '';
         this.dimensions = '';
