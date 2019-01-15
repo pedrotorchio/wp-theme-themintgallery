@@ -31,11 +31,13 @@ export default {
 
     main
         hero-section( v-if = "artist" :artist = "artist" )
-        bio-section( v-if = "artist" :artist = "artist" )
+        bio-section.inner-section( v-if = "artist" :artist = "artist" )
         
                 
 </template>
 <style lang="sass" scoped>
 
-    
+.bio
+    margin: 100px 0
+
 </style>

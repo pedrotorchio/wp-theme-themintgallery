@@ -16,9 +16,6 @@ export default {
                 medium: this.artist.profilePicture.sizes.medium.url.toString(),
                 placeholder: this.artist.profilePicture.sizes.placeholder.url.toString()
             }
-        },
-        artistName() {
-            return this.artist.name
         }
     }
 }
@@ -28,15 +25,19 @@ export default {
         lazy-image.img( 
             :src-placeholder = "profilePicture.placeholder" 
             :src="profilePicture.medium" )
-            h3 {{ artistName }}
+            h3 {{ artist.name }}
+        div.text( v-html = "artist.bio" )
 </template>
 
 <style lang="sass" scoped>
 .img
+    float: left
     $height: 300px
     width: $height
     height: $height
-
+    $space: 2em
+    margin-right: $space
+    margin-bottom: $space/2
     .caption
         h3
             transition-property: transform, filter, opacity
@@ -56,5 +57,13 @@ export default {
             filter: blur(0)
             opacity: 1
             transform: translateY(0px)
+.text
+    font-size: 18px
+    line-height: 2em
+
+    /deep/ p
+        margin-bottom: 1em
+        text-indent: 4em
+
 </style>
 
