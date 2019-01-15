@@ -34,12 +34,18 @@ export default {
     },
     methods: {
         async fetchData() {
+            this.artist = null
             this.artist = await this.$fetcher.getArtist(this.slug)
+        }
+    },
+    watch: {
+        '$route' (to, from) {
+            this.fetchData();
         }
     },
     created() {
         this.fetchData();
-    }
+    },
 }
 </script>
 <template lang="pug">
