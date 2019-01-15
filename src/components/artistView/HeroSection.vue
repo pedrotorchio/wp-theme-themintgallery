@@ -22,34 +22,48 @@ export default {
 }
 </script>
 <template lang="pug">
-    div.hero
-        lazy-image.img( 
+    div.hero( :class = "{ 'no-img': !artist.featured }" )
+        lazy-image.img(
+            v-if = "artist.featured"
             :hoverable = "false" 
             :src-placeholder = "featured.placeholder" 
             :src="featured.full" )
 
-            svg( v-if = "false" viewBox="0 0 18 18")
-            h1( v-else ) {{ artist.name }}
+        svg( v-if = "false" viewBox="0 0 18 18")
+        h1( v-else ) {{ artist.name }}
 </template>
 <style lang="sass" scoped>
 @import '~@/styles/config'
+$height: calc(100vh - #{$size--header-height})
 
 .hero
-    $height: calc(100vh - #{$size--header-height})
+    position: relative
     height: $height
+
+    display: flex
+    align-items: center
+    justify-content: center
+
+    &.no-img
+        height: 400px
     .img
         height: 100%
         width: 100%
         object-fit: cover
 
-        h1
-            font-size: 48px
-            text-transform: uppercase
-            text-align: center
-            line-height: $height
-            color: white
-            text-shadow: 6px 2px 15px #0b2e51
-            font-family: impact
-            letter-spacing: 5px
+h1, svg
+    position: absolute
+    z-index: 999
+h1
+    text-align: center
+
+    font-size: 48px
+    text-transform: uppercase
+    text-align: center
+    
+    color: white
+    text-shadow: 6px 2px 15px #0b2e51
+    font-family: impact
+    letter-spacing: 5px
 
 </style>

@@ -16,11 +16,14 @@ export default {
 }
 </script>
 <template lang="pug">
-    div.gallery
-        ul
-            li( v-for = "(piece, i) in gallery.pieces" v-if = "getFirstUrl(piece)" )
-                lazy-image.img( v-viewer :src = "getFirstUrl(piece)")
-                    h4.hover-phantom-effect {{ piece.title }}
+    
+    ul.gallery
+        li( v-for = "(piece, i) in gallery.pieces" v-if = "getFirstUrl(piece)" )
+            lazy-image.img( v-viewer :src = "getFirstUrl(piece)")
+                h4.title.hover-phantom-effect {{ piece.title }}
+                p.dimensions.hover-phantom-effect {{ piece.dimensions }}
+                p.type.hover-phantom-effect {{ piece.type }}
+                strong( v-if = "piece.isSoldOut" ) SOLD
         
 
 </template>
@@ -33,11 +36,27 @@ export default {
         display: flex
         justify-content: center
         align-items: center
+        flex-direction: column
 
+        h4, p, strong
+            position: static
+            margin: .2em
         h4
             font-size: $size--font-title
+        p
+            font-size: $size--font-text
 
+        strong
+            color: maroon
 
+        .title
+            transition-delay: 0
+        .dimensions
+            transition-delay: .2s
+        .type
+            transition-delay: .4s
+        strong
+            transition-delay: .6s
 ul
     display: flex
     flex-wrap: wrap
@@ -49,6 +68,8 @@ ul
         width: $width
         margin: $space
 
-        .img /deep/ h4
-            top: calc(50% - 1em)
+        .img 
+            box-shadow: 0px 0 11px #0000006b
+            /deep/ h4
+                top: calc(50% - 1em)
 </style>
