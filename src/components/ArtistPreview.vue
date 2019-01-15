@@ -13,11 +13,23 @@ export default {
     },
     computed: {
         profilePicture() {
-            
             return {
                 medium: this.artist.profilePicture.sizes.medium.url.toString(),
                 thumbnail: this.artist.profilePicture.sizes.thumbnail.url.toString()
             }
+        },
+        thumbnails() {
+            const pieces = this.artist.gallery.pieces;
+
+            const rndIndex = () => Math.floor(Math.random() * pieces.length)
+            const imgSrc = i => pieces[i % pieces.length].images[0].url.toString();
+
+            const i = rndIndex()
+
+            const img1 = imgSrc(i)
+            const img2 = imgSrc(i + 1)
+
+            return [ img1, img2 ]
         }
     }
 }
@@ -27,8 +39,8 @@ export default {
         div.imgs
             lazy-image.profile_pic( :src = "profilePicture.medium" :src-placeholder = "profilePicture.thumbnail" )
             div.small-imgs
-                lazy-image( :src = "profilePicture.thumbnail" )
-                lazy-image( :src = "profilePicture.thumbnail" )
+                lazy-image( :src = "thumbnails[0]" )
+                lazy-image( :src = "thumbnails[1]" )
 
         h4 {{ artist.name }}
 
