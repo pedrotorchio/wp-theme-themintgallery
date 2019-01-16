@@ -58,8 +58,8 @@ export default {
     transition-duration: 2s
     transition-timing-function: cubic-bezier(0.7, -0.01, 0.15, 1.02)
 
-    color: rgba($color--text, .1)
-    text-shadow: 0 0 30px $color--text
+    color: rgba($color--text, .05)
+    text-shadow: 0 0 60px $color--text
 
     &.shown
         color: $color--text
