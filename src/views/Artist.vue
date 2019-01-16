@@ -5,10 +5,11 @@ import BioSection from '@/components/artistView/BioSection';
 import GallerySection from '@/components/artistView/GallerySection';
 import ThemedGallerySection from '@/components/artistView/ThemedGallerySection';
 import MiddleNavigation from '@/components/artistView/MiddleNavigation';
+import AdditionalSection from '@/components/artistView/AdditionalSection';
 
 export default {
     name: 'Artist',
-    components: { HeroSection, BioSection, MiddleNavigation, GallerySection, ThemedGallerySection },
+    components: { HeroSection, BioSection, MiddleNavigation, GallerySection, ThemedGallerySection, AdditionalSection },
     props: {
         slug: {
             type: String,
@@ -56,10 +57,11 @@ export default {
             bio-section.inner-section( :artist = "artist" )
             middle-navigation.inner-section( :items = "allGalleries" )
             gallery-section#gallery.inner-section( :gallery = "artist.gallery" )
-            themed-gallery-section.inner-section( v-for = "(gallery, i) in artist.themedGalleries" :key = "i" 
+            themed-gallery-section.inner-section( v-for = "(gallery, i) in artist.themedGalleries" :key = "`themed-${i}`" 
                 :gallery = "gallery"
                 :id = "gallery.slug"
             )
+            additional-section( v-for = "(section, i) in artist.additionalSections" :key = "`section-${i}`" :data = "section" )
                 
 </template>
 <style lang="sass" scoped>

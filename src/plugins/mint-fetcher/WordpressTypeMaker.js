@@ -18,7 +18,7 @@ export function makeArtist(wpData) {
         // artist = makeBase(artist, wpData)
         artist.name = wpData.title.rendered
         artist.bio = wpData.acf.bio
-        artist.aditionalSections = wpData.CFS.additional
+        artist.additionalSections = wpData.CFS.additional
         artist.slug = wpData.slug || slugify (artist.name, { lower: true })
                 
         if (wpData.featured_image)
