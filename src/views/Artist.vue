@@ -30,7 +30,12 @@ export default {
                 slug: gl.slug
             }));
 
-            return [ gallery, ...themed ];
+            let additional = {
+                slug: 'additional',
+                title: 'Additional Information'
+            }
+
+            return [ gallery, ...themed, additional ];
         }
     },
     methods: {
@@ -61,7 +66,7 @@ export default {
                 :gallery = "gallery"
                 :id = "gallery.slug"
             )
-            h2.inner-section Additional Information
+            h2#additional.inner-section Additional Information
             additional-section( v-for = "(section, i) in artist.additionalSections" :key = "`section-${i}`" :data = "section" )
                 
 </template>
@@ -74,7 +79,7 @@ h2
     font-size: 32px
     text-align: center
     padding: 0
-    margin: 100px
+    margin-top: 100px
 
 
 </style>

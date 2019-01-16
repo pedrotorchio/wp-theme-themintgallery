@@ -14,9 +14,13 @@ export default {
 <style lang="sass" scoped>
 section
     /deep/
-        h2, p
+        h3
+            font-size: 1.2em
+            margin: 2em 0
+        h2
             font-size: 1.5em
-            margin: 1em 0
+            margin: 3em 0
         p
             font-size: 1em
+            margin: 1em
 </style>

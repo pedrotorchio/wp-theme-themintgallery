@@ -12,7 +12,20 @@ import 'viewerjs/dist/viewer.css'
 import Viewer from 'v-viewer'
 
 import SmoothScroll from 'smooth-scroll'
-new SmoothScroll('a[href*="#"]');
+new SmoothScroll('a[href*="#"]', {
+  offset: function (anchor, toggle) {
+    const headerSize = 80
+
+    if (toggle.classList.contains('.exact')) {
+        return 0
+
+    } else {
+        return headerSize;
+    }
+
+  },
+  easing: 'easeInOutCubic',
+});
 
 Vue.use(Viewer)
 
