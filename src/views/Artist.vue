@@ -79,7 +79,7 @@ h2
     font-size: 32px
     text-align: center
     padding: 0
-    margin-top: 100px
+    margin-top: 50px
 
 
 </style>
