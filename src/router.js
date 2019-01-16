@@ -24,6 +24,7 @@ export default new Router({
       scroll = {
         selector: to.hash
       }
+
     } else if (savedPosition) {
       scroll = savedPosition
 
