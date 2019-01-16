@@ -5,7 +5,7 @@ import TransparentView from './views/Transparent';
 Vue.use(Router);
 
 function asyncView(view) {
-  return () => import(`./views/${view}`);
+  return () => import(/* webpackChunkName: "[request]" */`./views/${view}`);
 }
 export default new Router({
   mode: "history",
