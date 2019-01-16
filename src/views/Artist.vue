@@ -61,6 +61,7 @@ export default {
                 :gallery = "gallery"
                 :id = "gallery.slug"
             )
+            h2.inner-section Additional Information
             additional-section( v-for = "(section, i) in artist.additionalSections" :key = "`section-${i}`" :data = "section" )
                 
 </template>
@@ -69,5 +70,11 @@ export default {
     padding: 1em
 .bio
     margin: 100px 0
+h2
+    font-size: 32px
+    text-align: center
+    padding: 0
+    margin: 100px
+
 
 </style>

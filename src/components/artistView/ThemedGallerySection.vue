@@ -11,12 +11,12 @@ export default {
 </script>
 <template lang="pug">
     div( :id = "gallery.slug" )
-        h4 {{ gallery.theme }}
+        h2 {{ gallery.theme }}
         gallery( :gallery = "gallery.gallery" )
 </template>
 
 <style lang="sass" scoped>
-h4
+h2
     font-size: 32px
     margin: 100px 0
     text-align: center
