@@ -19,12 +19,6 @@ export default {
             }
         }
     },
-    methods: {
-        animate( timeline ) {
-            timeline
-                .addCallback(() => this.$refs['text'].classList.add('shown'))
-        }
-    }
 }
 </script>
 <template lang="pug">
@@ -33,7 +27,7 @@ export default {
             :src-placeholder = "profilePicture.placeholder" 
             :src="profilePicture.medium" )
             h3.hover-phantom-effect {{ artist.name }}
-        div.text( ref = "text" v-html = "artist.bio" )
+        div.text.shown( ref = "text" v-html = "artist.bio" )
 </template>
 
 <style lang="sass" scoped>
