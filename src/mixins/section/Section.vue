@@ -10,11 +10,12 @@ export default {
         animation() {
             let { scrollTrigger, scrollOffset, scrollEvent, ...timelineParameters } = this.getTimelineParameters();
 
-            // defaults to root element triggered animation
+            // if scroll animation is NOT OFF
             if (scrollTrigger !== false) {
+                // defaults animation trigger to root element
                 if (!scrollTrigger)
                     scrollTrigger = this.$el
-
+                // initially paused
                 timelineParameters.paused = true
 
             }                
@@ -36,10 +37,10 @@ export default {
             }
             
         },
-        getTimelineParameters() {
+        getTimelineParameters() { // overload
             return {}
         },
-        animate(){}
+        animate( timeline ){} // overload
     },
     mounted() {
         setTimeout(this.animation, 0);
