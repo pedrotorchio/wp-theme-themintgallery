@@ -20,6 +20,7 @@ export default new Router({
   ],
   scrollBehavior (to, from, savedPosition) {
     let scroll;
+    console.log(to.hash, savedPosition);
     if (to.hash) {
       scroll = {
         selector: to.hash

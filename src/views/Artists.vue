@@ -29,6 +29,8 @@ export default {
 </template>
 <style lang="sass" scoped>
 @import '~@/styles/config'
+@import '~media-query-mixins'
+
 $space: 50px
 .Artists-root
     display: flex
@@ -37,7 +39,10 @@ $space: 50px
     margin: $space 0
 
 .preview-container
-    flex: 0 0 50%
+    flex: 0 0 100%
+    +md
+        flex-basis: 50%
+
     border-bottom: 4px solid $color--primary
     margin-bottom: $space
 

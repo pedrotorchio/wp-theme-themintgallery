@@ -47,6 +47,7 @@ export default {
 
 <style lang="sass" scoped>
 @import '~@/styles/config'
+@import '~media-query-mixins'
 
 header
     padding: 0
@@ -66,19 +67,40 @@ header
             width: auto
 
     .navigation
-        flex: 1 1 auto
+        
         display: flex
+        flex: 1 1 auto
         justify-content: flex-end
+        
 
         #main-menu
             padding-right: 100px
             flex: 1 0 auto
             a
                 font-weight: 100
+
+            position: fixed
+            
+            flex: 1 1 auto
+            display: flex
+            flex-direction: column
+            justify-content: flex-end
+            right: 100%
+
+            +md
+                right: initial
+                position: relative
+                flex-direction: row
         .social
             flex: 0 0 auto
-            align-self: center
+            align-self: stretch
+            +md
+                align-self: center
+
             font-size: 24px
+
+            /deep/ ul
+                height: 100%
 
 ul
     height: 100%

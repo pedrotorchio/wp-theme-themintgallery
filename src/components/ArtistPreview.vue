@@ -47,10 +47,11 @@ export default {
 </template>
 <style lang="sass" scoped>
 @import '~@/styles/config'
+@import '~media-query-mixins'
 
 $img-size: 300px;
 $space: $img-size/20
-$sm-img-size: ($img-size - $space)/2
+$sm-img-size: $img-size/2
 
 h4
     font-size: inherit
@@ -59,26 +60,52 @@ h4
     color: $color--primary
     
 article.ArtistPreview-root
-    width: $img-size + $sm-img-size + $space
+    $fullWidth: $img-size + $sm-img-size + $space
+ 
+    
+    +md
+        width: $fullWidth
+        padding: 2em
+
     box-sizing: content-box
     font-size: 24px
-    padding: 2em
+    
 .imgs
     display: flex
     align-items: stretch
     justify-content: space-between
+    flex-direction: column
+
+    +md
+        flex-direction: row
+
 
 .profile_pic
-    width: $img-size
-    height: $img-size
+    
+    width: 100%
+    padding-bottom: 100%
+    +md
+        width: $img-size
+        height: $img-size
+        padding: 0
 
 .small-imgs 
     display: flex
-    flex-direction: column
+    flex-direction: row
+    margin-top: $space
+    +md
+        margin-top: 0
+        flex-direction: column
     justify-content: space-between
     align-items: stretch
+
     .hoverable-image
-        width: $sm-img-size
-        height: $sm-img-size
+        $size: calc(50% - #{$space/2})
+        width: $size
+        padding-bottom: $size
+        
+        +md
+            width: $sm-img-size
+            padding-bottom: calc(100% - #{$space/2})
 
 </style>
