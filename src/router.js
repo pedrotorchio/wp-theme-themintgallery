@@ -5,7 +5,7 @@ import TransparentView from './views/Transparent';
 Vue.use(Router);
 
 function asyncView(view) {
-  return () => import(`./views/${view}`);
+  return () => import(/* webpackChunkName: "[request]" */`./views/${view}`);
 }
 export default new Router({
   mode: "history",
@@ -20,6 +20,7 @@ export default new Router({
   ],
   scrollBehavior (to, from, savedPosition) {
     let scroll;
+    console.log(to.hash, savedPosition);
     if (to.hash) {
       scroll = {
         selector: to.hash

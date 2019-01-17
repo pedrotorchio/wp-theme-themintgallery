@@ -32,14 +32,33 @@ export default {
 
 <style lang="sass" scoped>
 @import '~@/styles/config'
+@import '~media-query-mixins'
+
+.bio
+    display: flex
+    flex-direction: column-reverse
+
+    +md
+        display: block
+
 .img
-    float: left
     $height: 300px
-    width: $height
-    height: $height
     $space: 2em
-    margin-right: $space
+
+    height: auto
+    width: 100%
     margin-bottom: $space/2
+
+    padding-bottom: 100%
+    margin-top: 1em
+
+    +md 
+        float: left    
+        width: $height
+        height: $height
+        margin-right: $space
+        padding-bottom: 0
+        margin-top: 0
 
     /deep/ h3
         bottom: 1em
