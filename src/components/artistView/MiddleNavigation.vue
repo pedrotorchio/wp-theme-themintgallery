@@ -30,8 +30,17 @@ export default {
 </template>
 <style lang="sass" scoped>
 @import '~@/styles/config'
+@import '~media-query-mixins'
+
 ul
     justify-content: center
+    overflow-x: auto
+    padding: 0 
+    justify-content: flex-start
+    +md
+        overflow-x: visible
+        justify-content: center
+
 nav ul 
     li
         opacity: 0
@@ -39,6 +48,14 @@ nav ul
         transition-property: opacity, transform
         transition-duration: .5s
         transition-timing-function: ease-out
+
+        $height: 64px
+        height: $height
+        line-height: $height
+
+        +md
+            height: auto
+            line-height: auto
 
         &.shown
             opacity: 1
