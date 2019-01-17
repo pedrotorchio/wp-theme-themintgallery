@@ -1,7 +1,7 @@
 <?php
 
 define('VUE_PORT', 9876);
-define('IS_PRODUCTION', false);
+define('IS_PRODUCTION', true);
 
 add_theme_support('post-thumbnails');
 
