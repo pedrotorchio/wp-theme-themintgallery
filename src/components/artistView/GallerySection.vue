@@ -38,6 +38,8 @@ export default {
 </template>
 <style lang="sass" scoped>
 @import '~@/styles/config'
+@import '~media-query-mixins'
+
 .img
     padding-bottom: 100%
 
@@ -76,9 +78,15 @@ ul
         $width: 100%/3
         $space: 1em
         $width: calc(#{$width} - 2 * #{$space})
+
+        width: 100%
+        margin: $space 0
+        +md
+            width: $width    
+            margin: $space
+
         flex: 0 0 auto
-        width: $width
-        margin: $space
+        
         $shadow-color: #0000006b
 
         .img

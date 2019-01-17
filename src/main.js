@@ -13,8 +13,9 @@ import Viewer from 'v-viewer'
 
 import SmoothScroll from 'smooth-scroll'
 new SmoothScroll('a[href*="#"]', {
+  speed: 200,
   offset: function (anchor, toggle) {
-    const headerSize = 80
+    const headerSize = 100
 
     if (toggle.classList.contains('.exact')) {
         return 0

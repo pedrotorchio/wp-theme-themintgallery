@@ -71,8 +71,7 @@ export default {
                 
 </template>
 <style lang="sass" scoped>
-.inner-section
-    padding: 1em
+
 .bio
     margin: 100px 0
 h2
