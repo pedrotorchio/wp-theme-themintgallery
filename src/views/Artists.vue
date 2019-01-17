@@ -40,6 +40,7 @@ $space: 50px
 
 .preview-container
     flex: 0 0 100%
+
     +md
         flex-basis: 50%
 

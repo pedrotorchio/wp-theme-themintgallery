@@ -52,7 +52,8 @@ export default {
 $img-size: 300px;
 $space: $img-size/20
 $sm-img-size: $img-size/2
-
+article
+    cursor: pointer
 h4
     font-size: inherit
     margin: 1em
@@ -60,9 +61,9 @@ h4
     color: $color--primary
     
 article.ArtistPreview-root
+    
     $fullWidth: $img-size + $sm-img-size + $space
  
-    
     +md
         width: $fullWidth
         padding: 2em
