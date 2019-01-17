@@ -15,14 +15,17 @@ export default {
         profilePicture() {
             return {
                 medium: this.artist.profilePicture.sizes.medium.url.toString(),
-                thumbnail: this.artist.profilePicture.sizes.thumbnail.url.toString()
+                placeholder: this.artist.profilePicture.sizes.placeholder.url.toString()
             }
         },
         thumbnails() {
             const pieces = this.artist.gallery.pieces;
 
             const rndIndex = () => Math.floor(Math.random() * pieces.length)
-            const imgSrc = i => pieces[i % pieces.length].images[0].url.toString();
+            const imgSrc = i => ({
+                placeholder: pieces[i % pieces.length].images[0].sizes.placeholder.url.toString(),
+                thumbnail: pieces[i % pieces.length].images[0].sizes.thumbnail.url.toString()
+            })
 
             const i = rndIndex()
 
@@ -37,10 +40,10 @@ export default {
 <template lang="pug">
     article
         div.imgs
-            lazy-image.profile_pic( :src = "profilePicture.medium" :src-placeholder = "profilePicture.thumbnail" )
+            lazy-image.profile_pic( :src = "profilePicture.medium" :src-placeholder = "profilePicture.placeholder" )
             div.small-imgs
-                lazy-image( :src = "thumbnails[0]" )
-                lazy-image( :src = "thumbnails[1]" )
+                lazy-image( :src = "thumbnails[0].thumbnail" :src-placeholder = "thumbnails[0].placeholder" )
+                lazy-image( :src = "thumbnails[1].thumbnail" :src-placeholder = "thumbnails[1].placeholder" )
 
         h4 {{ artist.name }}
 

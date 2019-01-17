@@ -10,9 +10,6 @@ export default {
         required: true
     },
     methods: {
-        getFirstUrl(piece) {
-            return piece.images.length > 0 && piece.images[0].url.toString()
-        },
         animate(timeline) {
             const delay = .2
             const show = el => el.classList.add('shown')
@@ -20,15 +17,26 @@ export default {
 
             timeline
                 .addCallback(() => this.$refs['pieces'].forEach(delayShow))
-        }
+        },
+        getImages(piece) {
+            const sizes = piece.images.length > 0 && piece.images[0].sizes;
+
+            let placeholder = sizes.placeholder || sizes.thumbnail || sizes.medium || sizes.large || sizes.full
+            let medium = sizes.medium || sizes.large || sizes.full || sizes.thumbnail || sizes.placeholder
+
+            return sizes && {
+                placeholder: placeholder.url.toString(),
+                medium: medium.url.toString()
+            }
+        },
     }
 }
 </script>
 <template lang="pug">
     
     ul.gallery
-        li( ref = "pieces" v-for = "(piece, i) in gallery.pieces" v-if = "getFirstUrl(piece)" )
-            lazy-image.img( v-viewer :src = "getFirstUrl(piece)")
+        li( ref = "pieces" v-for = "(piece, i) in gallery.pieces" v-if = "getImages(piece)" )
+            lazy-image.img( v-viewer :src = "getImages(piece).medium" :src-placeholder = "getImages(piece).placeholder" )
                 h4.title.hover-phantom-effect {{ piece.title }}
                 p.dimensions.hover-phantom-effect {{ piece.dimensions }}
                 p.type.hover-phantom-effect {{ piece.type }}

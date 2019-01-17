@@ -66,7 +66,7 @@ export function makePiece(wpData){
         piece.isSoldOut = makeBoolean(wpData.is_sold_out)
         
         if (wpData.images)
-            piece.images = wpData.images.map(makeImage);
+            piece.images = wpData.images.map( data => makeImage(data) );
 
     return piece
 }
@@ -75,7 +75,8 @@ export function makeBoolean(wpData) {
     return Boolean(wpData) && wpData != 0
 }
 export function makeImage(wpData, sizes = true) {
-
+    // console.log('a', wpData.sizes, sizes, sizes && wpData.sizes ? 'extract' : 'not extract');
+    
     let image = new Image()
         image = makeBase(image, wpData)
         image.url = new URL(wpData.url)
@@ -85,14 +86,14 @@ export function makeImage(wpData, sizes = true) {
         image.width = wpData.width || -1
         image.height = wpData.height || -1
         image.orientation = wpData.orientation || 'landscape'
-
+        
         if (sizes && wpData.sizes) {
             
            Object
                 .entries(wpData.sizes)
                 .forEach( ([size, data]) => {
                     
-                    image.sizes[size] = makeImage(data, false)
+                    image.sizes[size] = makeImage(data)
                 })
         }
 
