@@ -1,4 +1,6 @@
-var publicPath;
+var path = require( 'path' );
+var AssetsPlugin = require( 'assets-webpack-plugin' );
+
 var config = {}
 
 if (process.env.NODE_ENV === 'production') {
@@ -8,17 +10,24 @@ if (process.env.NODE_ENV === 'production') {
     if(config.plugins.has('extract-css')) {
       const extractCSSPlugin = config.plugin('extract-css')
       extractCSSPlugin && extractCSSPlugin.tap(() => [{
-        filename: '[name].css',
-        chunkFilename: '[name].css'
+        filename: '[name]-[hash].css',
+        chunkFilename: '[name]-[hash].css'
       }])
     }
   }
 
   config.configureWebpack = {
     output: {
-      filename: '[name].js',
-      chunkFilename: '[name].js'
-    }
+      filename: '[name]-[hash].js',
+      chunkFilename: '[name]-[hash].js'
+    },
+    plugins: [
+      new AssetsPlugin({
+        filename: 'assets.json',
+        path: path.resolve( __dirname, './build' ),
+        fullPath: false
+      })
+    ]
   }
 
 } else {

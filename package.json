@@ -10,6 +10,7 @@
     "generate-svg": "npx vsvg -s ./src/assets/svg -t ./src/components/svg --es6 --svgo ./svgo.config.js"
   },
   "dependencies": {
+    "assets-webpack-plugin": "^3.9.7",
     "axios": "^0.18.0",
     "css-reset-and-normalize": "^1.0.1",
     "media-query-mixins": "^2.1.1",
