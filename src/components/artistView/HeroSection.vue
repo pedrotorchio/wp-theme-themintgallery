@@ -17,7 +17,7 @@ export default {
         featured() {
 
             return {
-                placeholder: this.artist.featured.sizes.placeholder.url.toString(),
+                placeholder: this.artist.featured.sizes.thumbnail.url.toString(),
                 full: this.artist.featured.sizes.full.url.toString()
             }
         },
