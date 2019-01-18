@@ -36,7 +36,7 @@ export default {
                     const rndShow = (el, i) => setTimeout(() => show(el), rndDuration(i))
 
                     els.forEach( rndShow )
-                })
+                }, 1)
         }
     }
 }
