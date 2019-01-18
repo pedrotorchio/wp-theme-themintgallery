@@ -6,10 +6,9 @@ import '@/plugins/svg-icons'
 import '@/plugins/root-id'
 import '@/plugins/mint-fetcher'
 
-Vue.config.productionTip = false;
-
 import 'viewerjs/dist/viewer.css'
 import Viewer from 'v-viewer'
+Vue.use(Viewer)
 
 import SmoothScroll from 'smooth-scroll'
 new SmoothScroll('a[href*="#"]', {
@@ -28,8 +27,7 @@ new SmoothScroll('a[href*="#"]', {
   easing: 'easeInOutCubic',
 });
 
-Vue.use(Viewer)
-
+Vue.config.productionTip = false;
 new Vue({
   router,
   render: h => h(App)
