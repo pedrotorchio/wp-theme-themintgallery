@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "npm run serve -- --port 9876",
+    "start": "./build/setOptions.js --mode DEVELOPMENT; npm run serve -- --port 9876",
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "./build/setOptions.js --mode PRODUCTION; vue-cli-service build",
     "lint": "vue-cli-service lint",
     "generate-svg": "npx vsvg -s ./src/assets/svg -t ./src/components/svg --es6 --svgo ./svgo.config.js"
   },
@@ -30,6 +30,7 @@
     "babel-eslint": "^10.0.1",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0",
+    "minimist": "^1.2.0",
     "node-sass": "^4.9.0",
     "pug": "^2.0.3",
     "pug-plain-loader": "^1.0.0",

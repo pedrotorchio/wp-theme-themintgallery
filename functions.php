@@ -1,7 +1,8 @@
 <?php
+require_once( get_stylesheet_directory() . '/build/getOptions.php' );
 
 define('VUE_PORT', 9876);
-define('IS_PRODUCTION', true);
+define('IS_PRODUCTION', $options['isProduction']);
 
 add_theme_support('post-thumbnails');
 

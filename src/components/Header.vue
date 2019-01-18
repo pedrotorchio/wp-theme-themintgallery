@@ -164,6 +164,17 @@ ul
 
 .router-link-active, .router-link-exact-active 
     color: $color--alert
-
 </style>
+<style lang="sass">
+@import '~@/styles/config'
+@import '~media-query-mixins'
+
+.admin-bar header#main-header
+    top: $size--wr-bar-height
+    .navigation #main-menu
+        top: $size--header-height + $size--wr-bar-height
+        +md
+            top: initial
+</style>
+
 
