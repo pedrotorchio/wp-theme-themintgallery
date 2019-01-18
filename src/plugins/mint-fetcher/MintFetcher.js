@@ -6,6 +6,7 @@ export default class MintFetcher {
     constructor(endpoint) {
         this.endpoint = endpoint
         this.fetcher = new Fetcher(endpoint);
+        window.store = Store
     }
 
     async getArtists() {
