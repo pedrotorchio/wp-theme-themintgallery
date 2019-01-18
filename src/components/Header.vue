@@ -170,9 +170,11 @@ ul
 @import '~media-query-mixins'
 
 .admin-bar header#main-header
-    top: $size--wr-bar-height
+    top: $size--wr-bar-height-sm
+    +md
+        top: $size--wr-bar-height
     .navigation #main-menu
-        top: $size--header-height + $size--wr-bar-height
+        top: $size--header-height + $size--wr-bar-height-sm
         +md
             top: initial
 </style>
