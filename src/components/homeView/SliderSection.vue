@@ -1,10 +1,10 @@
 <script>
 import LazyImage from 'vue-hoverable-lazy-image'
 import { TweenMax, TimelineMax } from 'gsap'
-
+import BlockLink from '@/components/BlockLink'
 export default {
     name: 'Slider',
-    components: { LazyImage },
+    components: { LazyImage, BlockLink },
     props: {
         slides: {
             type: Array,
@@ -29,9 +29,7 @@ export default {
                 large: slide.image.getImageSizeUrl('large')
             }
         },
-        isRoute(url) {
-            return typeof url === 'object' && url !== null
-        },
+
         makeArray(str) {
             return str.split('')
         },
@@ -62,18 +60,12 @@ export default {
                     h4.title
                         span( ref = "titleLetters" v-for = "(lt, i) in slide.titleArray" :key = "lt + i" :data-index = "i" ) {{ lt }}
 
-                    div.cta( v-if = "slide.ctaUrl" )
-                        router-link.link( v-if = "isRoute(slide.ctaUrl)" :to = "slide.ctaUrl" ) {{ slide.ctaText }}
-                        a.link( v-else-if = "slide.ctaUrl" :href = "slide.ctaUrl" ) {{ slide.ctaText }}
-
-                        span.top
-                        span.bottom
-                        span.left
-                        span.right
+                    block-link.cta( v-if = "slide.ctaUrl" ref = "cta" :text = "slide.ctaText" :url = "slide.ctaUrl" :shown = "false" )
 
       
 </template>
 <style lang='sass' scoped>
+
 $height: 300px
 .Slider-root
     background-color: black
@@ -89,6 +81,7 @@ $height: 300px
 
         /deep/ .title
             line-height:  $height
+            font-family: impact
             text-align: center
             font-size: 64px
             color: white
@@ -96,68 +89,12 @@ $height: 300px
 
             span
                 opacity: 0
-    /deep/ .cta
+
+    .cta
         z-index: 555
         position: absolute
         bottom: 1em
-        z-index: 555
         font-size: 32px
         right: 1em
-        opacity: 0
-        
-        padding: .5em
-        min-width: 200px
-        text-align: center
-
-        transition: opacity 2s
-        transition-timing-function: ease-out
-
-
-        color: black
-        background-color: white
-        -webkit-text-fill-color: transparent
-        -webkit-background-clip: text
-
-        &.shown
-            opacity: 1
-            .right, .left
-                height: 100%
-            .top, .bottom
-                width: 100%
-        span
-            position: absolute
-            transition: width 2s, height 2s
-            transition-timing-function: ease-out
-            background: currentColor
-
-            $size: 4px
-            &.top
-                top: 0
-                left: 0
-                height: $size
-                width: 0
-            
-            &.bottom
-                bottom: 0
-                right: 0
-                height: $size
-                width: 0
-
-            &.left
-                left: 0
-                bottom: 0
-                width: $size
-                height: 0
-            
-            &.right
-                right: 0
-                top: 0
-                width: $size
-                height: 0
-
-        a.link
-            color: inherit
-
-
 
 </style>

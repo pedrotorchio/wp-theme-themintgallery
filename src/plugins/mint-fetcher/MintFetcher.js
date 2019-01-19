@@ -10,19 +10,8 @@ export default class MintFetcher {
     }
 
     async getArtists() {
-        // has artists stored
-        let storeArtists = Store.artists && Store.artists.length > 0 ? Store.artists : false;
-
-        if (!storeArtists) {
-            // has artists stored OR from backend OR fetch
-            const raw = __INITIAL_DATA__.artists || (await this.fetcher.get('/artists'));
-            const artists = raw
-                    .map(TypeMaker.makeArtist);
-            
-            Store.artists = artists;
-        }
-        
-        return Store.artists;
+        const artists = await this.fetch( 'artists', raw => raw.map(TypeMaker.makeArtist) );
+        return artists;
     }
     async getArtist(slug) {
         let artists = await this.getArtists(); 
@@ -30,6 +19,27 @@ export default class MintFetcher {
         let artist = artists.find( a => a.slug == slug );
 
         return artist;
+    }
+    async getSlides() {
+        
+        const slides = await this.fetch( 'slides', raw => raw.map(TypeMaker.makeSlide) );
+        
+        return slides;
+    }
+
+    async fetch(what, callback, predicate = storeValue => storeValue.length > 0) {
+        let data = predicate(Store[what]) && Store[what] || false;
+
+        if (!data) {
+            // has artists stored OR from backend OR fetch
+            const raw = __INITIAL_DATA__[what] || (await this.fetcher.get(`/${what}`));
+            
+            data = callback(raw)
+            
+            Store[what] = data
+        }
+
+        return data
     }
     
 }

@@ -3,6 +3,7 @@ import Image from './Image'
 import Gallery from './Gallery'
 import ThemedGallery from './ThemedGallery'
 import Piece from './Piece'
+import Slide from './Slide'
 
 import slugify from 'slugify'
 
@@ -12,6 +13,32 @@ export function makeBase(model, wpData) {
         model.id = wpData.id
 
     return model
+}
+export function makeSlide(wpData) {
+    let slide = new Slide()
+        slide.title = wpData.acf.title
+        slide.ctaText = wpData.acf.call_to_action
+        
+        if (wpData.acf.call_to_action_url)
+            slide.ctaUrl = makeUrl(wpData.acf.call_to_action_url)
+
+        slide.image = makeImage(wpData.featured_image)
+
+    return slide
+}
+export function makeUrl(wpData) {
+    let url = wpData
+
+    try {
+        url = new URL(wpData);
+
+    } catch(e) {
+        url = {
+            path: wpData
+        }
+    }
+    return url
+
 }
 export function makeArtist(wpData) {
     let artist = new Artist()
@@ -108,5 +135,6 @@ export default {
     makeThemedGallery,
     makeBoolean,
     makePiece,
-    makeGallery
+    makeGallery,
+    makeSlide
 }
