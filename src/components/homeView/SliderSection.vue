@@ -9,10 +9,15 @@ export default {
         slides: {
             type: Array,
             required: true
+        },
+        duration: {
+            type: Number,
+            default: 2
         }
     },
     data: () => ({
-        index: 0,
+        index__: 0,
+        timer: null
     }),
     computed: {
         slides__(){
@@ -20,6 +25,9 @@ export default {
                 sl.titleArray = this.makeArray(sl.title)
                 return sl
             });
+        },
+        index() {
+            return this.index__ % this.slides.length
         }
     },
     methods: {
@@ -29,23 +37,51 @@ export default {
                 large: slide.image.getImageSizeUrl('large')
             }
         },
-
+        getWidth() {
+            return document.documentElement.clientWidth
+        },
         makeArray(str) {
             return str.split('')
         },
-        start() {
+        next() {
+            this.index__++
+        },
+        beforeShowing(el) {
+            el.style.filter = "blur(5px)";
+            el.style.transform = "scale(.8)"
+        },
+        pause() {
+            if (this.timer)
+                clearTimeout(this.timer);
+        },
+        start(el, done) {
 
-            const tl = new TimelineMax({ delay: .5 });
-                let el;
+            const tl = new TimelineMax();
+
+                tl.to(el, .2, {
+                    filter: "blur(0)",
+                    scale: 1
+                })
+
                 if (el = this.$refs['titleLetters'])
                     tl
                         .staggerTo(el, .3, {
                             autoAlpha: 1
-                        }, .1)
+                        }, .1, .5)
 
-                if (el = this.$el.querySelector('.cta'))
+                if (el = this.$el.querySelector('.cta')){
                     tl
                         .addCallback(() => el.classList.add('shown'));
+                }
+                    
+            
+
+            tl.addCallback(() => {
+                const delay = (this.duration + 2) * 1000;
+                setTimeout(done, delay);
+                this.timer = setTimeout(this.next, delay);
+            })
+            
 
         },
     },
@@ -53,11 +89,11 @@ export default {
 </script>
 <template lang='pug'>
     div
-        transition( appear @enter = "start" )
-            div.inner-section.slide( v-if = "i == index" v-for="(slide, i) in slides__" :key="i" )
-                lazy-image.img( :src = "getImageUrls(slide).large" :src-placeholder = "getImageUrls(slide).placeholder" @load = "start" )
+        transition( appear @enter = "start" @before-enter = "beforeShowing")
+            div.inner-section.slide( ref = "container" v-if = "i == index" v-for="(slide, i) in slides__" :key="i" )
+                lazy-image.img( :src = "getImageUrls(slide).large" :src-placeholder = "getImageUrls(slide).placeholder" )
 
-                    h4.title
+                    h4.title( :style = "{ fontSize: `${getFitFontSize( 400, slide.title, getWidth() )}px` }") 
                         span( ref = "titleLetters" v-for = "(lt, i) in slide.titleArray" :key = "lt + i" :data-index = "i" ) {{ lt }}
 
                     block-link.cta( v-if = "slide.ctaUrl" ref = "cta" :text = "slide.ctaText" :url = "slide.ctaUrl" :shown = "false" )
@@ -65,11 +101,12 @@ export default {
       
 </template>
 <style lang='sass' scoped>
-
+@import '~media-query-mixins'
 $height: 300px
 .Slider-root
     background-color: black
     height: $height
+    overflow: hidden
 
     .slide
         height: 100%
@@ -94,7 +131,17 @@ $height: 300px
         z-index: 555
         position: absolute
         bottom: 1em
+        width: 100%
         font-size: 32px
-        right: 1em
+        
+
+        +md
+            right: 1em
+            width: auto
+
+
+.title
+    +md
+        font-size: 64px !important
 
 </style>

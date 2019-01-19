@@ -5,6 +5,7 @@ import router from "./router";
 import '@/plugins/svg-icons'
 import '@/plugins/root-id'
 import '@/plugins/mint-fetcher'
+import '@/plugins/font-size-fitter'
 
 import 'viewerjs/dist/viewer.css'
 import Viewer from 'v-viewer'
