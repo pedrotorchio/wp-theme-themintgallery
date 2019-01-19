@@ -62,16 +62,26 @@ export default {
                     filter: "blur(0)",
                     scale: 1
                 })
+                const ttlt = this.$refs['titleLetters']
 
-                if (el = this.$refs['titleLetters'])
+                if (ttlt)
                     tl
-                        .staggerTo(el, .3, {
-                            autoAlpha: 1
-                        }, .1, .5)
+                        .addCallback(() => {
+                            ttlt.forEach((lt, i)=> { 
 
-                if (el = this.$el.querySelector('.cta')){
+                            setTimeout(
+                                () => lt.classList.add('animate-phantom-effect'), 
+                                i * 50 + Math.random() * 100);
+
+                        })});
+
+                const cta = this.$el.querySelector('.cta')
+                if (cta){
+                    const delay = ttlt && ttlt.length*100 || 2000
                     tl
-                        .addCallback(() => el.classList.add('shown'));
+                        .addCallback(() => {
+                            cta.classList.add('shown')
+                        }, delay/1000);
                 }
                     
             
@@ -94,7 +104,7 @@ export default {
                 lazy-image.img( :src = "getImageUrls(slide).large" :src-placeholder = "getImageUrls(slide).placeholder" )
 
                     h4.title( :style = "{ fontSize: `${getFitFontSize( 400, slide.title, getWidth() )}px` }") 
-                        span( ref = "titleLetters" v-for = "(lt, i) in slide.titleArray" :key = "lt + i" :data-index = "i" ) {{ lt }}
+                        span.phantom-effect( ref = "titleLetters" v-for = "(lt, i) in slide.titleArray" :key = "lt + i" :data-index = "i" ) {{ lt }}
 
                     block-link.cta( v-if = "slide.ctaUrl" ref = "cta" :text = "slide.ctaText" :url = "slide.ctaUrl" :shown = "false" )
 
@@ -125,7 +135,7 @@ $height: 300px
             text-shadow: 2px 1px 0 black
 
             span
-                opacity: 0
+                display: inline-block
 
     .cta
         z-index: 555
