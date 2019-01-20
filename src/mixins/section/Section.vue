@@ -1,6 +1,6 @@
 <script>
 import { TimelineMax } from 'gsap';
-import Trigger from 'scroll-watcher';
+import Trigger from 'scrollmonitor';
 
 export default {
     data: () => ({
@@ -27,17 +27,19 @@ export default {
 
             // scroll event
             if (scrollTrigger) {
-                console.log(scrollTrigger, scrollOffset)
-                scrollOffset = scrollOffset || 100
-                scrollEvent = scrollEvent || 'enter'
+                // if not defined, set to -100
+                scrollOffset = scrollOffset || -100
+                // if is a number, transform into bottom property
+                // otherwise, keep as is
+                // scrollOffset = typeof scrollOffset == 'number' && { bottom: scrollOffset } || scrollOffset;
+
+                scrollEvent = scrollEvent || 'enterViewport'
 
                 const action = () => {
-                    console.log(`animating ${this.$options.name}`)
+                    console.log(`animating ${this.$options.name}`, scrollOffset)
                     this.animationTimeline.play()
                 }
-                new Trigger()
-                    .watch(scrollTrigger, scrollOffset)
-                    .on(scrollEvent, action);
+                Trigger.create(scrollTrigger, scrollOffset)[scrollEvent](action);
             }
             
         },

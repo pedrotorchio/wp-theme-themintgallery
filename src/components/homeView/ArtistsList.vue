@@ -9,7 +9,7 @@ export default {
     methods: {
         getTimelineParameters() {
             return {
-                scrollOffset: 600
+                scrollOffset: -350
             }
         },
         animate(timeline) {

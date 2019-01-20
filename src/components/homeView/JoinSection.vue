@@ -9,7 +9,7 @@ export default {
     methods: {
         getTimelineParameters() {
             return {
-                scrollOffset: 600
+                scrollOffset: -300
             }
         },
         animate( timeline ) {
@@ -17,7 +17,7 @@ export default {
                 .to(this.$refs['text'], 1, {
                     y: -50
                 })
-                .addCallback(()=>this.$refs['link'].$el.classList.add('shown'));
+                .addCallback(()=>this.$refs['link'].$el.classList.add('shown'), "-=.8");
         } 
     }
 }

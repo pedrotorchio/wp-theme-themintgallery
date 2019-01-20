@@ -1,9 +1,19 @@
 <script>
 import LazyImage from 'vue-hoverable-lazy-image'
 import BlockLink from '@/components/BlockLink'
+import Section from '@/mixins/section/Section'
 export default {
+    name: 'ShopSection',
+    mixins: [ Section ],
     components: { LazyImage, BlockLink },
-    props: [ 'featured', 'text' ]
+    props: [ 'featured', 'text' ],
+    methods: {
+        animate(timeline) {
+            
+            timeline
+                .addCallback(() => this.$refs['btn'].$el.classList.add('shown'))
+        }
+    }
 }
 </script>
 <template lang="pug">
@@ -11,7 +21,7 @@ export default {
         .inner-section
             div.half-inner-section
                 div.text
-                    block-link.link( :text = "text" :url = "{name: 'shop' }" )
+                    block-link.link( ref = "btn" :text = "text" :url = "{name: 'shop' }" )
             lazy-image.img( :src = "featured.getImageSizeUrl('full')" :src-placeholder = "featured.getImageSizeUrl('thumbnail')" :hoverable = "false" )
 </template>
 <style lang="sass" scoped>

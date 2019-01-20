@@ -31,7 +31,7 @@ export default {
                 .staggerTo(this.$refs['news'], 1, {
                     y: 0,
                     autoAlpha: 1
-                }, .2)
+                }, .2, .5)
                 .addCallback(() => this.$refs['cta'].$el.classList.add('shown'), 1)
                 
         }

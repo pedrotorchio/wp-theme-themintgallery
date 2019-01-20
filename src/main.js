@@ -26,7 +26,7 @@ new SmoothScroll('a[href*="#"]', {
     }
 
   },
-  easing: 'easeInOutCubic',
+  ease: 'easeInOutCubic',
 });
 
 Vue.config.productionTip = false;

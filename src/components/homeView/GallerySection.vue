@@ -1,6 +1,10 @@
 <script>
 import LazyImage from 'vue-hoverable-lazy-image'
+import Section from '@/mixins/section/Section'
+import { Expo } from 'gsap'
 export default {
+    name: 'GallerySection',
+    mixins: [ Section ],
     components: { LazyImage },
     props: [ 'featured', 'address', 'contact' ],
     computed: {
@@ -9,6 +13,22 @@ export default {
         },
         imageText() {
             return this.featured.caption || this.featured.title
+        }
+    },
+    methods: {
+        getTimelineParameters() {
+            return { 
+                scrollOffset: -600
+            }
+        },
+        animate (timeline) {
+            timeline
+                .addCallback(() => {
+                    const animate = ref => this.$refs[ref].classList.add('animate-phantom-effect');
+                    animate('h1');
+                    setTimeout(() => animate('contact'), 200)
+                    setTimeout(() => animate('address'), 400)
+                });
         }
     }
 }
@@ -20,16 +40,19 @@ export default {
                 h3( v-if = "imageHasText" ) {{ imageText }}
             div.text
                 div.block
-                    h1 The Mint Gallery
-                    p(v-html = "contact")
-                p.address(v-html = "address")
+                    h1.phantom-effect.right( ref = "h1" ) The Mint Gallery
+                    p.phantom-effect.right( ref = "contact" v-html = "contact")
+                p.address.phantom-effect.right( ref = "address" v-html = "address")
 </template>
 <style lang="sass" scoped>
+@import '~@/styles/config'
+
 .inner-section
     display: flex
     align-items: flex-end
     .img, .text
         flex: 0 0 50%
+
 .img
     float: left
     height: 700px
@@ -41,7 +64,8 @@ h1, p
 h1
     font-weight: bold
     font-size: 64px
-
+h1, p
+    color: $color--primary !important
 .block
     margin-bottom: 25%
 .address
