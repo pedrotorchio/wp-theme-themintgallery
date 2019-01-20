@@ -10,7 +10,7 @@ export default {
         },
         shown: {
             type: Boolean,
-            default: true
+            default: false
         },
         shadow: {
             type: Boolean,
@@ -31,7 +31,7 @@ export default {
 </script>
 
 <template lang="pug">
-    div( :class = "{ shown, shadow }" )
+    div( :class = "{ shadow }" )
         span.top
         span.bottom
         span.left
@@ -53,16 +53,20 @@ export default {
 
     cursor: pointer
     opacity: 0
+    visibility: hidden
+
     color: $color--primary
     $active--box-shadow: inset 0 0 13px 7px
+
     &:hover
+        
         transition-duration: .5s
         background-color: $color--primary
         a.link
             color: white
 
     &.shown
-
+        visibility: visible
         opacity: 1
         .right, .left
             height: 100%
@@ -105,5 +109,5 @@ export default {
         z-index: 555
         width: 100%
         display: block
-        line-height: 1.5em
+        line-height: 2.5em
 </style>

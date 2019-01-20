@@ -1,8 +1,10 @@
 <script>
 import LazyImage from 'vue-hoverable-lazy-image'
 import BlockLink from '@/components/BlockLink'
+import Section from '@/mixins/section/Section'
 
 export default {
+    mixins: [ Section ],
     props: [ 'page' ],
     components: { LazyImage, BlockLink },
     computed: {
@@ -11,6 +13,12 @@ export default {
                 large: this.page.featuredImage.getImageSizeUrl('large'),
                 placeholder: this.page.featuredImage.getImageSizeUrl('placeholder')
             }
+        }
+    },
+    methods: {
+        animate( timeline ) {
+            timeline
+                .addCallback(() => this.$refs['cta'].$el.classList.add('shown'))
         }
     }
 }
@@ -26,7 +34,7 @@ export default {
                         span Artisan
 
                     h1.title The Mint Gallery
-                    block-link.cta( text = "Meet Our Art" :url = "{ path: '/artists' }" :shown = "false" )
+                    block-link.cta( ref = "cta" text = "Meet Our Art" :url = "{ path: '/artists' }" )
 
                 lazy-image.img( :hoverable = "false" :src = "image.large" :src-placeholder = "image.placeholder" )
             .news
@@ -51,8 +59,8 @@ section
     flex-direction: column
 .cta
     color: $color--primary
-    padding: 1em
     font-size: $size--font-title
+    width: 100%
 .hero
     flex: 1 1 80%
     min-height: 400px
