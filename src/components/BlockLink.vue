@@ -11,6 +11,10 @@ export default {
         shown: {
             type: Boolean,
             default: true
+        },
+        shadow: {
+            type: Boolean,
+            default: false
         }
     },
     computed: {
@@ -27,7 +31,7 @@ export default {
 </script>
 
 <template lang="pug">
-    div( :class = "{ shown }" )
+    div( :class = "{ shown, shadow }" )
         span.top
         span.bottom
         span.left
@@ -40,29 +44,25 @@ export default {
 <style lang="sass" scoped>
 @import '~@/styles/config'
 .BlockLink-root
-    
-    padding: .5em
+    position: relative
     min-width: 200px
     text-align: center
 
-    box-shadow: inset 0 0 0 0 white
-
-    transition: opacity 2s, color .5s, box-shadow 3s
+    transition: opacity 2s, color .5s, box-shadow 3s, background .5s
     transition-timing-function: ease-out
 
-
+    cursor: pointer
     opacity: 0
-    color: white
+    color: $color--primary
     $active--box-shadow: inset 0 0 13px 7px
     &:hover
         transition-duration: .5s
-        color: $color--alert
-        box-shadow: $active--box-shadow $color--alert !important
-        a
-            color: $color--alert
+        background-color: $color--primary
+        a.link
+            color: white
 
     &.shown
-        box-shadow: $active--box-shadow white
+
         opacity: 1
         .right, .left
             height: 100%
@@ -101,6 +101,9 @@ export default {
             height: 0
         
     a.link
-        color: inherit
+        color: $color--primary
         z-index: 555
+        width: 100%
+        display: block
+        line-height: 1.5em
 </style>

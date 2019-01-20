@@ -26,9 +26,19 @@ export default class MintFetcher {
         
         return slides;
     }
+    async getSlide(slug) {
+        const page = await this.fetch( `slides?slug=${slug}`, raw => TypeMaker.makeSlide(raw[0]) )
+
+        return page
+    }
+    async getPage(slug) {
+        const page = await this.fetch( `pages?slug=${slug}`, raw => TypeMaker.makePage(raw[0]) )
+
+        return page
+    }
 
     async fetch(what, callback, predicate = storeValue => storeValue.length > 0) {
-        let data = predicate(Store[what]) && Store[what] || false;
+        let data = Store[what] && predicate(Store[what]) && Store[what] || false;
 
         if (!data) {
             // has artists stored OR from backend OR fetch

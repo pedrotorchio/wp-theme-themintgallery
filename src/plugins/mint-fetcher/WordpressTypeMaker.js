@@ -4,6 +4,8 @@ import Gallery from './Gallery'
 import ThemedGallery from './ThemedGallery'
 import Piece from './Piece'
 import Slide from './Slide'
+import Page from './Page'
+import Quote from './Quote'
 
 import slugify from 'slugify'
 
@@ -14,17 +16,35 @@ export function makeBase(model, wpData) {
 
     return model
 }
+export function makePage(wpData) {
+    let page = new Page()
+        page = makeBase(page, wpData)
+        page.title = wpData.title.rendered
+        page.excerpt = wpData.excerpt
+        if (wpData.featured_image)
+            page.featuredImage = makeImage(wpData.featured_image)
+
+        page.htmlContent = wpData.content.rendered
+        page.quotes = wpData.CFS.quotes.map(makeQuote)
+
+        return page
+}
 export function makeSlide(wpData) {
     let slide = new Slide()
-        slide.title = wpData.acf.title
-        slide.ctaText = wpData.acf.call_to_action
-        
-        if (wpData.acf.call_to_action_url)
-            slide.ctaUrl = makeUrl(wpData.acf.call_to_action_url)
+        slide.title = wpData.acf.title || wpData.title
 
-        slide.image = makeImage(wpData.featured_image)
+        if (wpData.CFS.slides)
+            slide.pages = wpData.CFS.slides.map(makeImage)
+        if (wpData.featured_image)
+            slide.featuredImage = makeImage(wpData.featured_image)
 
     return slide
+}
+export function makeQuote(wpData) {
+    let quote = new Quote()
+        quote.htmlText = wpData.text
+        quote.author = wpData.author
+    return quote
 }
 export function makeUrl(wpData) {
     let url = wpData
@@ -123,7 +143,7 @@ export function makeImage(wpData, sizes = true) {
                     image.sizes[size] = makeImage(data)
                 })
         }
-
+        
         return image
 }
 
@@ -136,5 +156,6 @@ export default {
     makeBoolean,
     makePiece,
     makeGallery,
-    makeSlide
+    makeSlide,
+    makePage,
 }

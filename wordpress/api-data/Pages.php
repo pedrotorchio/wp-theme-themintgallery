@@ -1,12 +1,12 @@
 <?php
-add_action( 'rest_api_init', 'editSlidesData' );
+add_action( 'rest_api_init', 'editPagesData' );
 
-function editSlidesData() {
+function editPagesData() {
     // Add the plaintext content to GET requests for individual posts
     
 
     register_rest_field(
-        'slides',
+        'page',
         'featured_image',
         array(
             'get_callback' => function($object, $field_name, $request) {
@@ -16,7 +16,7 @@ function editSlidesData() {
         )
     );
     register_rest_field(
-        'slides',
+        'page',
         'acf',
         array(
             'get_callback' => function($object, $field_name, $request) {
@@ -27,14 +27,16 @@ function editSlidesData() {
         )
     );
     register_rest_field(
-        'slides',
+        'page',
         'CFS',
         array(
             'get_callback' => function($object, $field_name, $request) {
+                
                 $data = CFS()->get(false);
-                $data['slides'] = array_map(function ($data) {
-                    return wp_prepare_attachment_for_js($data['image']);
-                }, $data['slides']);
+
+                $data['quotes'] = array_map(function ($quoteId) {
+                    return CFS()->get(false, $quoteId);
+                }, $data['quotes']);
                 
                 return $data;
             },

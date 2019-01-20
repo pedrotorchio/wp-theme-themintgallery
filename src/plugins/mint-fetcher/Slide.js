@@ -4,8 +4,7 @@ export default class Slide extends Base {
     constructor() {
         super();
         this.title = ""
-        this.ctaText = ""
-        this.ctaUrl = null
-        this.image = null
+        this.featuredImage = null
+        this.images = []
     }   
 }

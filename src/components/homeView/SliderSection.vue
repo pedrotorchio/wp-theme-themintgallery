@@ -37,9 +37,6 @@ export default {
                 large: slide.image.getImageSizeUrl('large')
             }
         },
-        getWidth() {
-            return document.documentElement.clientWidth
-        },
         makeArray(str) {
             return str.split('')
         },
@@ -103,7 +100,7 @@ export default {
             div.inner-section.slide( ref = "container" v-if = "i == index" v-for="(slide, i) in slides__" :key="i" )
                 lazy-image.img( :src = "getImageUrls(slide).large" :src-placeholder = "getImageUrls(slide).placeholder" )
 
-                    h4.title( :style = "{ fontSize: `${getFitFontSize( 400, slide.title, getWidth() )}px` }") 
+                    h4.title( :style = "{ fontSize: `${getFitFontSize( 400, slide.title )}px` }") 
                         span.phantom-effect( ref = "titleLetters" v-for = "(lt, i) in slide.titleArray" :key = "lt + i" :data-index = "i" ) {{ lt }}
 
                     block-link.cta( v-if = "slide.ctaUrl" ref = "cta" :text = "slide.ctaText" :url = "slide.ctaUrl" :shown = "false" )
