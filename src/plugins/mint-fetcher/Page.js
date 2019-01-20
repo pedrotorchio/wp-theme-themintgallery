@@ -7,5 +7,6 @@ export default class Page extends Base {
         this.featuredImage = null
         this.htmlContent = ""
         this.quotes = []
+        this.data = {}
     }
 }

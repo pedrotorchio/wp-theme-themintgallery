@@ -26,6 +26,10 @@ export function makePage(wpData) {
 
         page.htmlContent = wpData.content.rendered
         page.quotes = wpData.CFS.quotes.map(makeQuote)
+        
+        const { CFS, acf, ...defaultData } = wpData;
+
+        page.data = { ...wpData['acf'], ...wpData['CFS'], ...defaultData };
 
         return page
 }

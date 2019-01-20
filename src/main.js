@@ -6,6 +6,7 @@ import '@/plugins/svg-icons'
 import '@/plugins/root-id'
 import '@/plugins/mint-fetcher'
 import '@/plugins/font-size-fitter'
+import '@/plugins/default-components'
 
 import 'viewerjs/dist/viewer.css'
 import Viewer from 'v-viewer'

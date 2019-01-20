@@ -45,7 +45,6 @@ export default {
 @import '~@/styles/config'
 .BlockLink-root
     position: relative
-    min-width: 200px
     text-align: center
 
     transition: opacity 2s, color .5s, box-shadow 3s, background .5s
@@ -105,7 +104,7 @@ export default {
             height: 0
         
     a.link
-        color: $color--primary
+        color: inherit
         z-index: 555
         width: 100%
         display: block

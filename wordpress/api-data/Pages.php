@@ -37,6 +37,11 @@ function editPagesData() {
                 $data['quotes'] = array_map(function ($quoteId) {
                     return CFS()->get(false, $quoteId);
                 }, $data['quotes']);
+
+                if ($object['slug'] == 'home') {
+                    $data['gallery_featured_image'] = wp_prepare_attachment_for_js($data['gallery_featured_image']);
+                    $data['shop_featured_image'] = wp_prepare_attachment_for_js($data['shop_featured_image']);
+                }
                 
                 return $data;
             },

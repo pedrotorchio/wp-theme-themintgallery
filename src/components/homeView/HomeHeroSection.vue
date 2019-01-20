@@ -50,9 +50,9 @@ export default {
 
                     h1.title 
                         span( v-for = "(lt, i) in titleArray" ) {{ lt }}
-                    block-link.cta( ref = "cta" text = "Meet Our Art" :url = "{ path: '/artists' }" )
+                    block-link.cta( ref = "cta" text = "Meet Our Talent" :url = "{ path: '/artists' }" )
 
-                lazy-image.img( ref = "img" :hoverable = "false" :src = "image.large" :src-placeholder = "image.placeholder" )
+                lazy-image.img.hang-shadow( ref = "img" :hoverable = "false" :src = "image.large" :src-placeholder = "image.placeholder" )
 
             .news
                 ul
@@ -65,6 +65,7 @@ export default {
 @import '~@/styles/config'
 section
     height: calc(100vh - #{$size--header-height})
+    max-height: 900px
     font-size: 16px
 .inner-section
     height: 100%
@@ -83,7 +84,6 @@ section
 .img
     height: 400px
     width: 600px
-    box-shadow: 22px 24px 70px 0rem rgba(0, 0, 0, 0.42)
     right: 50px
     // transform: translateX(80px)
     // visibility: hidden
