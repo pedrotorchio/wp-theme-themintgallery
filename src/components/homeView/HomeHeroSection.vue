@@ -2,23 +2,38 @@
 import LazyImage from 'vue-hoverable-lazy-image'
 import BlockLink from '@/components/BlockLink'
 import Section from '@/mixins/section/Section'
-
+import { Expo } from 'gsap'
 export default {
     mixins: [ Section ],
     props: [ 'page' ],
     components: { LazyImage, BlockLink },
+    data: () => ({
+        news: [
+            { when: "February 1st", text: "New artists opening" },
+            { when: "March 1st", text: "Thematic wales exhibition" }
+        ]
+    }),
     computed: {
         image() {
             return {
                 large: this.page.featuredImage.getImageSizeUrl('large'),
                 placeholder: this.page.featuredImage.getImageSizeUrl('placeholder')
             }
+        },
+        titleArray() {
+            return "The Mint Gallery".split('')
         }
     },
     methods: {
         animate( timeline ) {
+            
             timeline
-                .addCallback(() => this.$refs['cta'].$el.classList.add('shown'))
+                .staggerTo(this.$refs['news'], 1, {
+                    y: 0,
+                    autoAlpha: 1
+                }, .2)
+                .addCallback(() => this.$refs['cta'].$el.classList.add('shown'), 1)
+                
         }
     }
 }
@@ -33,20 +48,18 @@ export default {
                         span +
                         span Artisan
 
-                    h1.title The Mint Gallery
+                    h1.title 
+                        span( v-for = "(lt, i) in titleArray" ) {{ lt }}
                     block-link.cta( ref = "cta" text = "Meet Our Art" :url = "{ path: '/artists' }" )
 
-                lazy-image.img( :hoverable = "false" :src = "image.large" :src-placeholder = "image.placeholder" )
+                lazy-image.img( ref = "img" :hoverable = "false" :src = "image.large" :src-placeholder = "image.placeholder" )
+
             .news
                 ul
-                    li   
-                        h3 FEBRUARY 1st
-                        p Special exhibition with 5 new artists
-                    li
-                        h3 March 1st
-                        p Thematic event on wales
-
-            
+                    li( ref = "news" v-for = "(nw, i) in news" :key = "i" :data-index = "i" )
+                        h3 {{ nw.when }}
+                        p {{ nw.text }}
+        
 </template>
 <style lang="sass" scoped>
 @import '~@/styles/config'
@@ -72,6 +85,8 @@ section
     width: 600px
     box-shadow: 22px 24px 70px 0rem rgba(0, 0, 0, 0.42)
     right: 50px
+    // transform: translateX(80px)
+    // visibility: hidden
     position: absolute
 .pretitle, .title
     font-size: 64px
@@ -82,6 +97,7 @@ section
 .pretitle
     span
         display: block
+        color: $color--primary
 
 .news
     flex: 1 1 auto
@@ -94,6 +110,8 @@ section
     li
         display: inline-block
         margin: 0 1em
+        transform: translateY(10px)
+        opacity: 0
 
     h3
         font-size: inherit
