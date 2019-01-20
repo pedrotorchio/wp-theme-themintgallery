@@ -36,7 +36,7 @@ export default {
                 scrollEvent = scrollEvent || 'enterViewport'
 
                 const action = () => {
-                    console.log(`animating ${this.$options.name}`, scrollOffset)
+                    
                     this.animationTimeline.play()
                 }
                 Trigger.create(scrollTrigger, scrollOffset)[scrollEvent](action);

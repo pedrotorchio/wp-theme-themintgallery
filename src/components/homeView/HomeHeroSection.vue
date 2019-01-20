@@ -94,6 +94,7 @@ section
     text-align: center
 .title
     font-family: impact
+    color: $color--primary
 .pretitle
     span
         display: block

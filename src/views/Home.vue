@@ -45,7 +45,6 @@ export default {
         gallery-section( :featured = "page.data.gallery_featured_image" :address = "page.data.gallery_address" :contact = "page.data.gallery_contact" )
         acquire-section( :featured = "page.data.shop_featured_image" :text = "page.data.shop_text" )
         join-section( :text = "page.data.join_text" :cta = "page.data.join_cta" )
-        logo.middle-logo
 
 
 </template>
