@@ -1,16 +1,33 @@
 <script>
 import BlockLink from '@/components/BlockLink'
+import Section from '@/mixins/section/Section'
 export default {
+    name: 'Join',
+    mixins: [ Section ],
     components: { BlockLink },
-    props: [ 'text', 'cta' ]
+    props: [ 'text', 'cta' ],
+    methods: {
+        getTimelineParameters() {
+            return {
+                scrollOffset: 600
+            }
+        },
+        animate( timeline ) {
+            timeline
+                .to(this.$refs['text'], 1, {
+                    y: -50
+                })
+                .addCallback(()=>this.$refs['link'].$el.classList.add('shown'));
+        } 
+    }
 }
 </script>
 <template lang="pug">
     section
         .inner-section
             .container
-                p( v-html = "text" )
-                block-link.link( :text = "cta" :url = "{ name: 'join' }")
+                p( ref = "text" v-html = "text" )
+                block-link.link( ref = "link" :text = "cta" :url = "{ name: 'join' }")
             
 </template>
 

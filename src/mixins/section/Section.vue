@@ -27,13 +27,17 @@ export default {
 
             // scroll event
             if (scrollTrigger) {
-                
+                console.log(scrollTrigger, scrollOffset)
                 scrollOffset = scrollOffset || 100
                 scrollEvent = scrollEvent || 'enter'
 
+                const action = () => {
+                    console.log(`animating ${this.$options.name}`)
+                    this.animationTimeline.play()
+                }
                 new Trigger()
                     .watch(scrollTrigger, scrollOffset)
-                    .on(scrollEvent, () => this.animationTimeline.play());
+                    .on(scrollEvent, action);
             }
             
         },

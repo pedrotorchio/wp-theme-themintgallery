@@ -8,30 +8,17 @@ export default {
         url: {
             type: String | Object
         },
-        shown: {
-            type: Boolean,
-            default: false
-        },
-        shadow: {
-            type: Boolean,
-            default: false
-        }
     },
     computed: {
         isRoute() {
             return typeof this.url === 'object' && this.url !== null
         },
     },
-    methods: {
-        show() {
-            this.shown = true
-        }
-    }
 }
 </script>
 
 <template lang="pug">
-    div( :class = "{ shadow }" )
+    div
         span.top
         span.bottom
         span.left
