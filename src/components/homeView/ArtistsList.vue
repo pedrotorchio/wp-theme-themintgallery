@@ -1,8 +1,25 @@
 <script>
 import LazyImage from 'vue-hoverable-lazy-image'
+import Section from '@/mixins/section/Section'
 export default {
+    name: 'ArtistsList',
+    mixins: [ Section ],
     components: { LazyImage },
-    props: [ 'artists' ]
+    props: [ 'artists' ],
+    methods: {
+        getTimelineParameters() {
+            return {
+                scrollOffset: 600
+            }
+        },
+        animate(timeline) {
+            timeline
+                .staggerTo(this.$refs['artists'], .5, {
+                    autoAlpha: 1,
+                    y: 0
+                }, .2)
+        }
+    }
 }
 </script>
 <template lang="pug">
@@ -10,7 +27,7 @@ export default {
         div.inner-section
             h2.section-title Artists
             ul
-                li( v-for = "(artist, i) in artists" :key = "i" )
+                li( ref = "artists" v-for = "(artist, i) in artists" :key = "i" )
                     router-link( :to = "{ name: 'Artist', params: { slug: artist.slug } }")
                         lazy-image.img( :src = "artist.profilePicture.getImageSizeUrl('medium')" :src-placeholder = "artist.profilePicture.getImageSizeUrl('placeholder')" )
                             span.hover-phantom-effect More Info
@@ -26,6 +43,8 @@ ul
     align-items: flex-start
     justify-content: flex-start
 li
+    visibility: hidden
+    transform: translateY(10px)
     padding: 0 1%
     flex: 0 0 (100% / 4)
 .img

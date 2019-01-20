@@ -15,7 +15,7 @@ export default {
   data: () => ({
     slides: null,
     page: null,
-    artists: []
+    artists: null
   }),
   methods: {
     async fetchData() {
@@ -38,14 +38,14 @@ export default {
 
 <template lang="pug">
   div
-    template( v-if = "page" )
-      home-hero-section#hero( :page = "page" )
-      artists-list(:artists = "artists")
-      quote.quote( :quote = "page.quotes[0]" )
-      gallery-section( :featured = "page.data.gallery_featured_image" :address = "page.data.gallery_address" :contact = "page.data.gallery_contact" )
-      acquire-section( :featured = "page.data.shop_featured_image" :text = "page.data.shop_text" )
-      join-section( :text = "page.data.join_text" :cta = "page.data.join_cta" )
-      logo.middle-logo
+      home-hero-section#hero( v-if = "page" :page = "page" )
+      artists-list( v-if = "artists" :artists = "artists")
+      template( v-if = "page")
+        quote.quote( :quote = "page.quotes[0]" )
+        gallery-section( :featured = "page.data.gallery_featured_image" :address = "page.data.gallery_address" :contact = "page.data.gallery_contact" )
+        acquire-section( :featured = "page.data.shop_featured_image" :text = "page.data.shop_text" )
+        join-section( :text = "page.data.join_text" :cta = "page.data.join_cta" )
+        logo.middle-logo
 
 
 </template>
