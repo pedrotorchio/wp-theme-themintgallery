@@ -27,15 +27,15 @@ export default {
     template( v-if = "page" )
       home-hero-section#hero( :page = "page" )
       quote.quote( :quote = "page.quotes[0]" )
-    logo.middle-logo
+      logo.middle-logo
+
+
 </template>
 
 <style lang="sass" scoped>
 @import '~@/styles/config'
-
 .quote
-  padding: 0
-  height: 30%
+  color: #faf8f9
 
 .middle-logo
   height: 400px

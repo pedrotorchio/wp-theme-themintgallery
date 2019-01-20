@@ -10,9 +10,10 @@ export default {
 </script>
 
 <template lang="pug">
-    article.inner-section
-        p.text( v-html = "quote.htmlText" :style = "{ fontSize: `${getFitFontSize(1100, quote.htmlText)}px` }")
-        h3.author( v-text = "quote.author" )
+    article
+        .inner-section
+            p.text( v-html = "quote.htmlText" :style = "{ fontSize: `${getFitFontSize(1100, quote.htmlText)}px` }")
+            h3.author( v-text = "quote.author" )
 </template>
 
 <style lang="sass" scoped>
@@ -22,6 +23,7 @@ article
     +md
         padding: 200px 0
     color: white
+    background-color: currentColor
     .text
         font-size: 24px
         line-height: 2em
@@ -38,7 +40,7 @@ article
             text-shadow: inherit
             font-weight: 100
     .author
-        color: lightgrey
+        color: #00000030
         text-align: right
         font-style: italic
         margin: 1em
