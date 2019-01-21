@@ -1,7 +1,7 @@
 <script>
 import LazyImage from 'vue-hoverable-lazy-image'
 import BlockLink from '@/components/BlockLink'
-import Section from '@/mixins/section/Section'
+import Section from '@/mixins/section-timeline/Timeline'
 import { Expo } from 'gsap'
 export default {
     mixins: [ Section ],
@@ -85,7 +85,7 @@ section
     text-transform: uppercase
 .hero
     flex: 1 1 80%
-    min-height: 400px
+    min-height: 350px
     position: relative
     display: flex
     align-items: stretch

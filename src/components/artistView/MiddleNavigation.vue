@@ -1,5 +1,5 @@
 <script>
-import Section from '@/mixins/section/Section'
+import Section from '@/mixins/section-timeline/Timeline'
 export default {
     extends: Section,
     props: {

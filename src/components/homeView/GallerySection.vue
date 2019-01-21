@@ -1,6 +1,6 @@
 <script>
 import LazyImage from 'vue-hoverable-lazy-image'
-import Section from '@/mixins/section/Section'
+import Section from '@/mixins/section-timeline/Timeline'
 import { Expo } from 'gsap'
 export default {
     name: 'GallerySection',

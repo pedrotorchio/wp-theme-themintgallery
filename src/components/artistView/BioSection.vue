@@ -1,7 +1,7 @@
 <script>
 import Artist from '@/plugins/mint-fetcher/Artist';
 import LazyImage from 'vue-hoverable-lazy-image'
-import Section from '@/mixins/section/Section'
+import Section from '@/mixins/section-timeline/Timeline'
 export default {
     extends: Section,
     components: { LazyImage },

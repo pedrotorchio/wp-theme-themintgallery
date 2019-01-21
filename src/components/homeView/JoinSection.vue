@@ -1,6 +1,6 @@
 <script>
 import BlockLink from '@/components/BlockLink'
-import Section from '@/mixins/section/Section'
+import Section from '@/mixins/section-timeline/Timeline'
 export default {
     name: 'Join',
     mixins: [ Section ],
