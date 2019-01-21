@@ -41,7 +41,7 @@ export default {
       home-hero-section#hero( v-if = "page" :page = "page" )
       artists-list( v-if = "artists" :artists = "artists")
       template( v-if = "page")
-        quote.quote( :quote = "page.quotes[0]" )
+        quote.quote( :quote = "page.quotes[0]" white )
         gallery-section( :featured = "page.data.gallery_featured_image" :address = "page.data.gallery_address" :contact = "page.data.gallery_contact" )
         acquire-section( :featured = "page.data.shop_featured_image" :text = "page.data.shop_text" )
         join-section( :text = "page.data.join_text" :cta = "page.data.join_cta" )
@@ -52,7 +52,9 @@ export default {
 <style lang="sass" scoped>
 @import '~@/styles/config'
 .quote
-  color: #faf8f9
+  $internal: $color--primary
+  $external: darken($color--primary, 30%)
+  background: radial-gradient(#{$internal} 0%, #{$external} 80%, #{$external} 100%)
 
 .middle-logo
   height: 400px
