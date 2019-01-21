@@ -16,6 +16,12 @@ export default {
     AppFooter#main-footer
 </template>
 
-<style lang="scss" src="css-reset-and-normalize/scss/reset-and-normalize.scss"></style>
-<style lang="sass" src="@/styles/global.sass"></style>
-<style lang="sass" src="@/styles/root.sass"></style>
+<style lang="scss">
+@import "~css-reset-and-normalize/scss/reset-and-normalize.scss";
+</style>
+<style lang="sass">
+@import "@/styles/global.sass"
+</style>
+<style lang="sass">
+@import "@/styles/root.sass"
+</style>
