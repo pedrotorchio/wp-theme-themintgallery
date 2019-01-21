@@ -8,7 +8,7 @@ export default class Artist extends Base {
         this.slug = ''
         this.featured = null
         this.themedGalleries = []
-        this.gallery = []
+        this.gallery = null
         this.signatureSVG = null
         this.additionalSections = []
     }

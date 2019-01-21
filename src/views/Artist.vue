@@ -21,21 +21,37 @@ export default {
     }),
     computed: {
         allGalleries() {
+            let links = []
+
             let gallery = {
                 slug: 'gallery',
                 title: 'Main Gallery'
             }
-            let themed = this.artist.themedGalleries.map( gl => ({
-                title: gl.theme,
-                slug: gl.slug
-            }));
+            if (this.hasGallery)
+                links.push(gallery)
 
+            this.artist.themedGalleries.forEach( gl => {
+                links.push({
+                    title: gl.theme,
+                    slug: gl.slug
+                })
+            });
+            
+            
             let additional = {
                 slug: 'additional',
                 title: 'Additional Information'
             }
+            if (this.hasAdditional)
+                links.push(additional)
 
-            return [ gallery, ...themed, additional ];
+            return links;
+        },
+        hasGallery() {
+            return Boolean(this.artist.gallery && this.artist.gallery.pieces.length > 0)
+        },
+        hasAdditional() {
+            return Boolean(this.artist.additionalSections && this.artist.additionalSections.length > 0)
         }
     },
     methods: {
@@ -61,12 +77,12 @@ export default {
             hero-section( :artist = "artist" )
             bio-section.inner-section( :artist = "artist" )
             middle-navigation.inner-section( :items = "allGalleries" )
-            gallery-section#gallery.inner-section( :gallery = "artist.gallery" )
+            gallery-section#gallery.inner-section( v-if = "hasGallery" :gallery = "artist.gallery" )
             themed-gallery-section.inner-section( v-for = "(gallery, i) in artist.themedGalleries" :key = "`themed-${i}`" 
                 :gallery = "gallery"
                 :id = "gallery.slug"
             )
-            h2#additional.inner-section Additional Information
+            h2#additional.inner-section( v-if = "hasAdditional" ) Additional Information
             additional-section( v-for = "(section, i) in artist.additionalSections" :key = "`section-${i}`" :data = "section" )
                 
 </template>

@@ -19,6 +19,9 @@ export default {
             }
         },
         thumbnails() {
+            if (!this.artist.gallery)
+                return false;
+
             const pieces = this.artist.gallery.pieces;
 
             const rndIndex = () => Math.floor(Math.random() * pieces.length)
@@ -32,7 +35,7 @@ export default {
             const img1 = imgSrc(i)
             const img2 = imgSrc(i + 1)
 
-            return [ img1, img2 ]
+            return pieces.length >= 0 && [ img1, img2 ]
         }
     }
 }
@@ -41,7 +44,7 @@ export default {
     article
         div.imgs
             lazy-image.profile_pic( :src = "profilePicture.medium" :src-placeholder = "profilePicture.placeholder" )
-            div.small-imgs
+            div.small-imgs( v-if = "thumbnails" )
                 lazy-image( :src = "thumbnails[0].thumbnail" :src-placeholder = "thumbnails[0].placeholder" )
                 lazy-image( :src = "thumbnails[1].thumbnail" :src-placeholder = "thumbnails[1].placeholder" )
 
