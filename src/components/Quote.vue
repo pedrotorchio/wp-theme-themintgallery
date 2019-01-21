@@ -4,6 +4,10 @@ export default {
     props: {
         quote: {
             type: Quote
+        },
+        shadow: {
+            type: Boolean,
+            default: false
         }
     }
 }
@@ -12,12 +16,13 @@ export default {
 <template lang="pug">
     article
         .inner-section
-            p.text.discreet-text-shadow( v-html = "quote.htmlText" )
+            p.text( :class = "{ 'discreet-text-shadow': shadow }" v-html = "quote.htmlText" )
             h3.author( v-text = "quote.author" )
 </template>
 
 <style lang="sass" scoped>
 @import '~media-query-mixins'
+@import '~@/styles/config'
 article
     padding: 50px 0
     +md
@@ -30,8 +35,13 @@ article
             font-size: 32px
         line-height: 2em
         text-align: center
-        color: inherit
-        background-color: currentColor
+
+        color: rgba($color--primary, .5)
+        font-weight: 100
+        .discreet-text-shadow
+            color: inherit
+            background-color: currentColor
+            font-weight: 600
         &:before
             content: '"'
         &:after
@@ -41,7 +51,7 @@ article
             text-shadow: inherit
             font-weight: 100
     .author
-        color: #00000030
+        color: rgba($color--primary, .3)
         text-align: right
         font-style: italic
         margin: 1em
