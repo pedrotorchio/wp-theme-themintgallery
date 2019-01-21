@@ -1,0 +1,51 @@
+<script>
+import Quote from '@/plugins/mint-fetcher/Quote'
+export default {
+    props: {
+        quote: {
+            type: Quote
+        }
+    }
+}
+</script>
+
+<template lang="pug">
+    article
+        .inner-section
+            p.text.discreet-text-shadow( v-html = "quote.htmlText" )
+            h3.author( v-text = "quote.author" )
+</template>
+
+<style lang="sass" scoped>
+@import '~media-query-mixins'
+article
+    padding: 50px 0
+    +md
+        padding: 200px 0
+    color: white
+    background-color: currentColor
+    .text
+        font-size: 24px
+        +md
+            font-size: 32px
+        line-height: 2em
+        text-align: center
+        color: inherit
+        background-color: currentColor
+        &:before
+            content: '"'
+        &:after
+            content: '"'
+
+        /deep/ > *
+            text-shadow: inherit
+            font-weight: 100
+    .author
+        color: #00000030
+        text-align: right
+        font-style: italic
+        margin: 1em
+        margin-right: 2em
+
+</style>
+

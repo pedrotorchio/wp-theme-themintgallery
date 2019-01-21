@@ -119,6 +119,7 @@ header
             flex: 1 0 auto
             a
                 font-weight: 100
+                font-size: 14px
 
             position: fixed
             

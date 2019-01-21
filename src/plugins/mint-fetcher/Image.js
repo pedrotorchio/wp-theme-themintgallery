@@ -12,4 +12,10 @@ export default class Image extends Base{
         this.height = 0
         this.orientation = 'landscape'
     }
+
+    getImageSizeUrl(size) {
+        if (!size)
+            return this.url.toString()
+        return this.sizes[size] && this.sizes[size].url.toString() || false
+    }
 }

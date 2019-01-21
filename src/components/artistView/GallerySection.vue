@@ -23,17 +23,17 @@ export default {
 
             let placeholder = sizes.placeholder || sizes.thumbnail || sizes.medium || sizes.large || sizes.full
             let medium = sizes.medium || sizes.large || sizes.full || sizes.thumbnail || sizes.placeholder
-
+            
             return sizes && {
                 placeholder: placeholder.url.toString(),
                 medium: medium.url.toString()
             }
-        },
-    }
+        }
+    },
 }
 </script>
 <template lang="pug">
-    
+
     ul.gallery
         li( ref = "pieces" v-for = "(piece, i) in gallery.pieces" v-if = "getImages(piece)" )
             lazy-image.img( v-viewer :src = "getImages(piece).medium" :src-placeholder = "getImages(piece).placeholder" )
@@ -41,7 +41,6 @@ export default {
                 p.dimensions.hover-phantom-effect {{ piece.dimensions }}
                 p.type.hover-phantom-effect {{ piece.type }}
                 strong.hover-phantom-effect( v-if = "piece.isSoldOut" ) SOLD
-        
 
 </template>
 <style lang="sass" scoped>

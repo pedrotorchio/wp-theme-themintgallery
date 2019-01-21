@@ -1,5 +1,6 @@
 export default class Base {
     constructor() {
-        this.id = ''
+        this.id = '',
+        this.keywords = ''
     }
 }

@@ -12,11 +12,14 @@ export default new Router({
   base: '', //process.env.BASE_URL,
   routes: [
     { path: '/', name: 'home', component: asyncView('Home') },
+    { path: '/join-us', name: 'join', component: asyncView('Home') },
+    { path: '/shop', name: 'shop', component: asyncView('Home') },
 
     { path: '/artists', component: TransparentView, children: [
       { path: '', name: 'Artists', component: asyncView('Artists') },
       { path: ':slug', name: 'Artist', component: asyncView('Artist'), props: true }
-    ]}
+    ]},
+
   ],
   scrollBehavior (to, from, savedPosition) {
     let scroll;

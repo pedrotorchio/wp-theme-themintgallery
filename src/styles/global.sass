@@ -20,7 +20,7 @@ a
     max-width: $max-width
     margin-left: auto !important
     margin-right: auto !important
-    padding: 0 16px
+    padding: 0 $size--inner-padding
 
     &.no-pad
         padding: 0
@@ -80,23 +80,51 @@ ul.menu
 
 
 section, .section
-    padding: 100px 0
+    padding: 50px 0
+    +md
+        padding: 100px 0
+
+
+.phantom-effect
+    transition-property: transform, filter, opacity
+    transition-duration: 4s
+    transition-timing-function: cubic-bezier(0, 1.11, 0.4, 0.98)
+    color: white
+    opacity: 0
+    transform: translateX(-60px)
+    filter: blur(5px)
+
+    &.right
+        transform: translateX(60px)
+    
+
+.phantom-effect.animate-phantom-effect
+    filter: blur(0)
+    opacity: 1
+    transform: translateY(0px)
 
 .caption
     .hover-phantom-effect
-        transition-property: transform, filter, opacity
-        transition-duration: 4s
-        transition-timing-function: cubic-bezier(0, 1.11, 0.4, 0.98)
-        color: white
-        opacity: 0
-        transform: translateX(-60px)
-        filter: blur(5px)
+        @extend .phantom-effect
+
         position: absolute
         text-align: center
         width: 100%
-
+    
     &:hover
         .hover-phantom-effect
-            filter: blur(0)
-            opacity: 1
-            transform: translateY(0px)
+            @extend .phantom-effect.animate-phantom-effect
+
+.hang-shadow
+    box-shadow: 22px 24px 70px 0rem rgba(0, 0, 0, 0.42)
+.discreet-text-shadow
+    text-shadow: 1px 2px 1px #00000066
+
+.section-title
+    @extend .discreet-text-shadow
+    text-align: center
+    +md
+        text-align: left
+    margin-bottom: 100px
+    font-size: 100px
+    color: white

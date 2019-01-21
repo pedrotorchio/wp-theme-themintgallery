@@ -3,6 +3,9 @@ import Image from './Image'
 import Gallery from './Gallery'
 import ThemedGallery from './ThemedGallery'
 import Piece from './Piece'
+import Slide from './Slide'
+import Page from './Page'
+import Quote from './Quote'
 
 import slugify from 'slugify'
 
@@ -12,6 +15,54 @@ export function makeBase(model, wpData) {
         model.id = wpData.id
 
     return model
+}
+export function makePage(wpData) {
+    let page = new Page()
+        page = makeBase(page, wpData)
+        page.title = wpData.title.rendered
+        page.excerpt = wpData.excerpt
+        if (wpData.featured_image)
+            page.featuredImage = makeImage(wpData.featured_image)
+
+        page.htmlContent = wpData.content.rendered
+        page.quotes = wpData.CFS.quotes.map(makeQuote)
+        
+        const { CFS, acf, ...defaultData } = wpData;
+
+        page.data = { ...wpData['acf'], ...wpData['CFS'], ...defaultData };
+
+        return page
+}
+export function makeSlide(wpData) {
+    let slide = new Slide()
+        slide.title = wpData.acf.title || wpData.title
+
+        if (wpData.CFS.slides)
+            slide.pages = wpData.CFS.slides.map(makeImage)
+        if (wpData.featured_image)
+            slide.featuredImage = makeImage(wpData.featured_image)
+
+    return slide
+}
+export function makeQuote(wpData) {
+    let quote = new Quote()
+        quote.htmlText = wpData.text
+        quote.author = wpData.author
+    return quote
+}
+export function makeUrl(wpData) {
+    let url = wpData
+
+    try {
+        url = new URL(wpData);
+
+    } catch(e) {
+        url = {
+            path: wpData
+        }
+    }
+    return url
+
 }
 export function makeArtist(wpData) {
     let artist = new Artist()
@@ -96,7 +147,7 @@ export function makeImage(wpData, sizes = true) {
                     image.sizes[size] = makeImage(data)
                 })
         }
-
+        
         return image
 }
 
@@ -108,5 +159,7 @@ export default {
     makeThemedGallery,
     makeBoolean,
     makePiece,
-    makeGallery
+    makeGallery,
+    makeSlide,
+    makePage,
 }
