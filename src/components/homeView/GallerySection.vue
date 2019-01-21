@@ -46,17 +46,26 @@ export default {
 </template>
 <style lang="sass" scoped>
 @import '~@/styles/config'
+@import '~media-query-mixins'
 
 .inner-section
-    display: flex
+    +md
+        display: flex
     align-items: flex-end
     .img, .text
         flex: 0 0 50%
 
+    .text
+        padding: 50px 0
 .img
-    float: left
+    width: 100%
+    width: calc(100% + #{2*$size--inner-padding})
+    margin: 0 calc(-#{$size--inner-padding})
+    +md
+        float: left
+        width: 600px
     height: 700px
-    width: 600px
+    
 
 h1, p
     text-align: right

@@ -63,10 +63,17 @@ export default {
 </template>
 <style lang="sass" scoped>
 @import '~@/styles/config'
+@import '~media-query-mixins'
 section
-    height: calc(100vh - #{$size--header-height})
-    max-height: 900px
+    +md
+        height: calc(100vh - #{$size--header-height})
+        max-height: 900px
     font-size: 16px
+.text
+    z-index: 555
+    width: 100%
+    +md
+        width: auto
 .inner-section
     height: 100%
     display: flex
@@ -75,21 +82,38 @@ section
     color: $color--primary
     font-size: $size--font-title
     width: 100%
+    text-transform: uppercase
 .hero
     flex: 1 1 80%
     min-height: 400px
     position: relative
     display: flex
-    align-items: center
+    align-items: stretch
+    justify-content: center
+
+    +md
+        justify-content: flex-start
+        align-items: center
 .img
     height: 400px
-    width: 600px
-    right: 50px
+    width: 95%
+    filter: blur(2px) grayscale(0.7)
+
+    +sm
+        filter: blur(5px) grayscale(0.7)
+    +md
+        width: 600px
+        right: 50px
     // transform: translateX(80px)
     // visibility: hidden
     position: absolute
+
+    +md
+        filter: blur(0) grayscale(0)
 .pretitle, .title
-    font-size: 64px
+    font-size: 48px
+    +md
+        font-size: 64px
     letter-spacing: .01em
     text-align: center
 .title

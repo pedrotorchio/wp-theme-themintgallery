@@ -12,7 +12,7 @@ export default {
 <template lang="pug">
     article
         .inner-section
-            p.text.discreet-text-shadow( v-html = "quote.htmlText" :style = "{ fontSize: `${getFitFontSize(1100, quote.htmlText)}px` }")
+            p.text.discreet-text-shadow( v-html = "quote.htmlText" )
             h3.author( v-text = "quote.author" )
 </template>
 
@@ -26,6 +26,8 @@ article
     background-color: currentColor
     .text
         font-size: 24px
+        +md
+            font-size: 32px
         line-height: 2em
         text-align: center
         color: inherit

@@ -36,6 +36,7 @@ export default {
 </template>
 
 <style lang="sass" scoped>
+@import '~media-query-mixins'
 
 ul
     display: flex
@@ -46,7 +47,13 @@ li
     visibility: hidden
     transform: translateY(10px)
     padding: 0 1%
-    flex: 0 0 (100% / 4)
+    flex: 0 0 100%
+    margin-bottom: 50px
+    +sm 
+        flex: 0 0 (100% / 3)
+    +md
+        
+        flex: 0 0 (100% / 4)
 .img
     width: 100%
     padding-bottom: 100%
