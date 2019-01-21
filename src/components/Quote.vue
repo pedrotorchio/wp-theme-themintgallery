@@ -5,6 +5,14 @@ export default {
         quote: {
             type: Quote
         },
+        white: {
+            type: Boolean,
+            default: false
+        },
+        primary: {
+            type: Boolean,
+            default: false
+        },
         shadow: {
             type: Boolean,
             default: false
@@ -15,8 +23,8 @@ export default {
 
 <template lang="pug">
     article
-        .inner-section
-            p.text( :class = "{ 'discreet-text-shadow': shadow }" v-html = "quote.htmlText" )
+        .inner-section( :class = "{ white, primary }" )
+            p.text( :class = "{ 'discreet-text-shadow': shadow }" v-html = "quote.htmlText" :style = "{ color }" )
             h3.author( v-text = "quote.author" )
 </template>
 
@@ -27,7 +35,7 @@ article
     padding: 50px 0
     +md
         padding: 200px 0
-    color: white
+
     background-color: currentColor
     .text
         font-size: 24px
@@ -35,8 +43,7 @@ article
             font-size: 32px
         line-height: 2em
         text-align: center
-
-        color: rgba($color--primary, .5)
+        color: inherit
         font-weight: 100
         .discreet-text-shadow
             color: inherit
@@ -57,5 +64,15 @@ article
         margin: 1em
         margin-right: 2em
 
+.white
+    .text
+        color: rgba(white, .6) !important
+    .author
+        color: rgba(white, .4) !important
+.primary
+    .text
+        color: rgba($color--primary, .6) !important
+    .author
+        color: rgba($color--primary, .4) !important
 </style>
 
