@@ -36,6 +36,7 @@ export default {
 </template>
 
 <style lang="sass" scoped>
+@import '~@/styles/config'
 @import '~media-query-mixins'
 
 ul
@@ -44,16 +45,18 @@ ul
     align-items: flex-start
     justify-content: flex-start
 li
+    $margin: 2em
     visibility: hidden
     transform: translateY(10px)
-    padding: 0 1%
+    padding: 1%
+    
     flex: 0 0 100%
     margin-bottom: 50px
-    +sm 
-        flex: 0 0 (100% / 3)
+    box-shadow: 0 0 10px 3px #00000024
+
     +md
-        
-        flex: 0 0 (100% / 4)
+        margin: 0 $margin
+        flex: 0 0 calc(#{100% / 3} - #{$margin * 2})
 .img
     width: 100%
     padding-bottom: 100%
@@ -63,8 +66,8 @@ li
         top: 50%
 
 
-
 h3
     text-transform: uppercase
     margin: 1em
+    color: $color--primary !important
 </style>
