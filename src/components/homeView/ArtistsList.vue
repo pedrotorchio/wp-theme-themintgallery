@@ -45,7 +45,7 @@ ul
     align-items: flex-start
     justify-content: flex-start
 li
-    $margin: 2em
+    
     visibility: hidden
     transform: translateY(10px)
     padding: 1%
@@ -54,7 +54,12 @@ li
     margin-bottom: 50px
     box-shadow: 0 0 10px 3px #00000024
 
+    +sm
+        $margin: 1em
+        margin: 0 $margin
+        flex: 0 0 calc(#{100% / 3} - #{$margin * 2})
     +md
+        $margin: 2em
         margin: 0 $margin
         flex: 0 0 calc(#{100% / 3} - #{$margin * 2})
 .img
