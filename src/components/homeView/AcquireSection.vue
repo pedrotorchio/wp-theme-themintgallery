@@ -26,23 +26,41 @@ export default {
 </template>
 <style lang="sass" scoped>
 @import "~@/styles/config"
+@import '~media-query-mixins'
 section
     background-color: $color--primary
     padding: 0
 .inner-section
     padding: 0
     color: white
-    display: flex
+    position: relative
+    +md
+        display: flex
     max-width: 1800px
+
     .img, .half-inner-section
         flex: 0 0 50%
+        z-index: 555
+        width: 100%
+        
     .text
         max-width: $max-width/2
         margin-left: auto
         height: 100%
     .img
-        padding-bottom: 50%
-    
+        position: relative
+        padding-bottom: 100%
+        +md
+            padding-bottom: 50%
+    .half-inner-section
+        z-index: 5555
+        position: absolute
+        width: 100%
+        height: 100%
+        +md
+            position: relative
+            width: initial
+            height: initial
     .link
         width: 80%
         margin: 0 auto
@@ -51,7 +69,10 @@ section
         font-weight: bold
         display: block
         top: 50%
+        transform: translateY(-50%)
         position: relative
         text-transform: uppercase
-        font-size: $size--font-title
+        font-size: 18px
+        +md
+            font-size: $size--font-title
 </style>

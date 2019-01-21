@@ -56,7 +56,7 @@ export default {
         flex: 0 0 50%
 
     .text
-        padding: 50px 0
+        padding-top: 50px
 .img
     width: 100%
     width: calc(100% + #{2*$size--inner-padding})
@@ -76,7 +76,8 @@ h1
 h1, p
     color: $color--primary !important
 .block
-    margin-bottom: 25%
+    +md
+        margin-bottom: 25%
 .address
     font-size: 1.3em
     font-weight: 100
