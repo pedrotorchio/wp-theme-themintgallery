@@ -44,7 +44,10 @@ section
         width: 100%
         
     .text
-        max-width: $max-width/2
+        max-width: initial
+        +md
+            max-width: $max-width/2
+
         margin-left: auto
         height: 100%
     .img

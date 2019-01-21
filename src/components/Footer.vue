@@ -41,7 +41,6 @@ footer
 
 .copyright a
     display: block
-    height: 2em
     line-height: 2em
     text-transform: uppercase
     color: white
