@@ -1,12 +1,19 @@
 <script>
+import Logo from '@/components/Logo'
+
 export default {
-    
+    components: { Logo }    
 }
 </script>
 <template lang="pug">
-    main
+    main    
+        logo.logo
 </template>
 <style lang="sass" scoped>
+.logo
+    position: relative
+    top: 50%
+    transform: translateY(-50%)
 main
     position: fixed
     top: 0
