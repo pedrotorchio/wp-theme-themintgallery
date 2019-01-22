@@ -5,19 +5,23 @@ Vue.use({
         Vue.prototype.$loading = new Vue({
             data: () => ({
                 state: true,
-                progress: 0
+                progressState: 0
             }),
             methods: {
                 set(state = true) {
                     if (!state)
-                        this.progress = 0
+                        this.progress(0)
 
                     this.state = state
                 },
                 progress(number) {
+                    this.progressState = number
+
                     if (number >= 100)
                         this.set(false)
-                    this.progress = number
+                },
+                add(number) {
+                    this.progress(this.progressState + number)
                 }
             }
         });

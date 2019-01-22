@@ -18,17 +18,17 @@ export default {
   methods: {
     async fetchData() {
       this.$loading.set(true);
-
-      Promise.all([
-        this.$fetcher.getPage('home'), 
-        this.$fetcher.getArtists()
-      ]).then( ([ page, artists ]) => {
-        this.page = this.formatPage(page)
-        this.artists = artists
-
-        this.$loading.set(false);
-      });
-
+      
+      this.$fetcher.getPage('home')
+        .then(page => {
+          this.page = this.formatPage(page)
+          this.$loading.add(60)
+        });
+      this.$fetcher.getArtists()
+        .then(artists => {
+          this.artists = artists
+          this.$loading.add(40)
+        });
     },
     formatPage(page) {
       page.data.gallery_featured_image = TypeMaker.makeImage(page.data.gallery_featured_image);

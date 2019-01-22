@@ -10,7 +10,7 @@ export default {
         async fetchData() {
             this.$loading.set(true)
             this.artists = await this.$fetcher.getArtists()
-            this.$loading.set(false)
+            this.$loading.add(100)
         },
         getArtistRoute(artist) {
             return { 

@@ -59,7 +59,7 @@ export default {
             this.$loading.set(true)
             this.artist = null
             this.artist = await this.$fetcher.getArtist(this.slug)
-            this.$loading.set(false)
+            this.$loading.add(100)
         }
     },
     watch: {

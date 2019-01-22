@@ -2,18 +2,39 @@
 import Logo from '@/components/Logo'
 
 export default {
-    components: { Logo }    
+    components: { Logo },
+    computed: {
+        progress() {
+            return this.$loading.progressState/100
+        },
+        rotateAngle() {
+            return 90 - this.progress*90
+        }
+    }
 }
 </script>
 <template lang="pug">
-    main    
+    main
         logo.logo
+        .progress( :style = "{ width: `${progress * 100}%` }" )
 </template>
 <style lang="sass" scoped>
+@import '~@/styles/config'
+
+.progress
+    height: 10px
+    width: 0
+    left: 0
+    bottom: 0
+    position: absolute
+    background-color: $color--primary
+    transition: width .5s ease-out
+
 .logo
     position: relative
     top: 50%
     transform: translateY(-50%)
+    transition: transform .5s ease-out
 main
     position: fixed
     top: 0
@@ -22,7 +43,7 @@ main
     width: 100vw
     background-color: white
     z-index: 99999999999
-    transition: opacity 1s
+    transition: opacity .2s
 
     &.entering, &.removed
         opacity: 0
