@@ -1,6 +1,8 @@
 <script>
 import Quote from '@/plugins/mint-fetcher/Quote'
+import Timeline from '@/mixins/section-timeline/Timeline'
 export default {
+    mixins: [ Timeline ],
     props: {
         quote: {
             type: Quote
@@ -16,6 +18,12 @@ export default {
         shadow: {
             type: Boolean,
             default: false
+        }
+    },
+    methods: {
+        animate(timeline) {
+            timeline
+                .addCallback( () => this.$el.classList.add('shown') )
         }
     }
 }
@@ -64,6 +72,16 @@ article
         margin: 1em
         margin-right: 2em
 
+.text, .author
+    opacity: 0
+    transform: scale(.9)
+    transition-property: opacity, transform
+    transition-duration: 2s
+    transition-timing-function: ease-out
+.shown
+    .text, .author
+        opacity: .5
+        transform: scale(1)
 .white
     .text
         color: rgba(white, .6) !important
