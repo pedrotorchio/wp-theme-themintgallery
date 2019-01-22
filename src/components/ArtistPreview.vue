@@ -25,17 +25,30 @@ export default {
             const pieces = this.artist.gallery.pieces;
 
             const rndIndex = () => Math.floor(Math.random() * pieces.length)
-            const imgSrc = i => ({
-                placeholder: pieces[i % pieces.length].images[0].sizes.placeholder.url.toString(),
-                thumbnail: pieces[i % pieces.length].images[0].sizes.thumbnail.url.toString()
-            })
+            const getImg = piece => piece.images && piece.images.length > 0 && piece.images[0]
+            const imgSrc = i => {
+                const piece = pieces[i % pieces.length]
+                const img = getImg(piece)
 
-            const i = rndIndex()
+                return img && {
+                    placeholder: img.getImageSizeUrl('placeholder'),
+                    thumbnail: img.getImageSizeUrl('thumbnail')
+                }
+                
+            };
+            
+            let img1, img2;
+            if (pieces.length > 0) {
+                const i = rndIndex()
 
-            const img1 = imgSrc(i)
-            const img2 = imgSrc(i + 1)
+                img1 = img2 = imgSrc(i)
 
-            return pieces.length >= 0 && [ img1, img2 ]
+                if (pieces.length > 1)
+                    img2 = imgSrc(i + 1)
+
+            } else return false;
+
+            return [ img1, img2 ]
         }
     }
 }
@@ -45,8 +58,8 @@ export default {
         div.imgs
             lazy-image.profile_pic( :src = "profilePicture.medium" :src-placeholder = "profilePicture.placeholder" )
             div.small-imgs( v-if = "thumbnails" )
-                lazy-image( :src = "thumbnails[0].thumbnail" :src-placeholder = "thumbnails[0].placeholder" )
-                lazy-image( :src = "thumbnails[1].thumbnail" :src-placeholder = "thumbnails[1].placeholder" )
+                lazy-image( v-if = "thumbnails[0]" :src = "thumbnails[0].thumbnail" :src-placeholder = "thumbnails[0].placeholder" )
+                lazy-image( v-if = "thumbnails[1]"  :src = "thumbnails[1].thumbnail" :src-placeholder = "thumbnails[1].placeholder" )
 
         h4 {{ artist.name }}
 
