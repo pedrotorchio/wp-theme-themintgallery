@@ -17,8 +17,18 @@ export default {
   }),
   methods: {
     async fetchData() {
-      this.page = this.formatPage(await this.$fetcher.getPage('home'))
-      this.artists = await this.$fetcher.getArtists()
+      this.$loading.set(true);
+
+      Promise.all([
+        this.$fetcher.getPage('home'), 
+        this.$fetcher.getArtists()
+      ]).then( ([ page, artists ]) => {
+        this.page = this.formatPage(page)
+        this.artists = artists
+
+        this.$loading.set(false);
+      });
+
     },
     formatPage(page) {
       page.data.gallery_featured_image = TypeMaker.makeImage(page.data.gallery_featured_image);

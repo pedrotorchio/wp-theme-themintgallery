@@ -8,7 +8,9 @@ export default {
     }),
     methods: {
         async fetchData() {
+            this.$loading.set(true)
             this.artists = await this.$fetcher.getArtists()
+            this.$loading.set(false)
         },
         getArtistRoute(artist) {
             return { 

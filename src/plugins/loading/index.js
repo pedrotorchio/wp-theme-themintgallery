@@ -4,7 +4,7 @@ Vue.use({
     install(Vue) {
         Vue.prototype.$loading = new Vue({
             data: () => ({
-                state: false
+                state: true
             }),
             methods: {
                 set(state = true) {
