@@ -1,4 +1,4 @@
 {
-  "isProduction": false,
+  "isProduction": true,
   "port": 9876
 }
