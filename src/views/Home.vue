@@ -1,6 +1,5 @@
 <script>
 import TypeMaker from '@/plugins/mint-fetcher/TypeMaker'
-import SliderSection from '@/components/homeView/SliderSection'
 import HomeHeroSection from '@/components/homeView/HomeHeroSection'
 import Logo from '@/components/Logo'
 import Quote from '@/components/Quote'
@@ -11,15 +10,13 @@ import JoinSection from '@/components/homeView/JoinSection'
 
 export default {
   name: "home",
-  components: { HomeHeroSection, SliderSection, Quote, Logo, ArtistsList, GallerySection, AcquireSection, JoinSection },
+  components: { HomeHeroSection, Quote, Logo, ArtistsList, GallerySection, AcquireSection, JoinSection },
   data: () => ({
-    slides: null,
     page: null,
     artists: null
   }),
   methods: {
     async fetchData() {
-      this.slides = await this.$fetcher.getSlide('home')
       this.page = this.formatPage(await this.$fetcher.getPage('home'))
       this.artists = await this.$fetcher.getArtists()
     },

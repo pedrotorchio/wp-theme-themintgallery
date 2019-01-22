@@ -24,7 +24,7 @@ export default {
 <template lang="pug">
     article
         .inner-section( :class = "{ white, primary }" )
-            p.text( :class = "{ 'discreet-text-shadow': shadow }" v-html = "quote.htmlText" :style = "{ color }" )
+            p.text( :class = "{ 'discreet-text-shadow': shadow }" v-html = "quote.htmlText" )
             h3.author( v-text = "quote.author" )
 </template>
 
