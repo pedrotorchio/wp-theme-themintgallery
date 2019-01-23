@@ -7,13 +7,29 @@ function editArtistData() {
 
     register_rest_field(
         'artists',
+        'category_names',
+        array(
+            'get_callback' => function($object, $field_name, $request) {
+                
+                $categories = get_the_category( $object['id'] );
+                $names = array_map(function($category) {
+                    return $category->name;
+
+                }, $categories);
+                
+                return $names;
+           }
+        )
+    );
+    register_rest_field(
+        'artists',
         'featured_image',
         array(
             'get_callback' => function($object, $field_name, $request) {
                 return wp_prepare_attachment_for_js($object['featured_media']);
            }
         )
-        );
+    );
     register_rest_field(
         'artists',
         'CFS',
