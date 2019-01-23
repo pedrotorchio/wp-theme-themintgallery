@@ -25,7 +25,9 @@ export function makePage(wpData) {
             page.featuredImage = makeImage(wpData.featured_image)
 
         page.htmlContent = wpData.content.rendered
-        page.quotes = wpData.CFS.quotes.map(makeQuote)
+
+        if (wpData.CFS.quotes)
+            page.quotes = wpData.CFS.quotes.map(makeQuote)
         
         const { CFS, acf, ...defaultData } = wpData;
 
@@ -118,8 +120,11 @@ export function makePiece(wpData){
         piece.dimensions = wpData.dimensions;
         piece.isSoldOut = makeBoolean(wpData.is_sold_out)
         
-        if (wpData.images)
+        if (wpData.images) {
+            wpData.images = wpData.images.filter(img => Boolean(img))
             piece.images = wpData.images.map( data => makeImage(data) );
+        }
+            
 
     return piece
 }
@@ -129,7 +134,9 @@ export function makeBoolean(wpData) {
 }
 export function makeImage(wpData, sizes = true) {
     // console.log('a', wpData.sizes, sizes, sizes && wpData.sizes ? 'extract' : 'not extract');
-    
+    if (wpData == null)
+        return false;
+
     let image = new Image()
         image = makeBase(image, wpData)
         image.url = new URL(wpData.url)
