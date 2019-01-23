@@ -24,6 +24,7 @@ function editArtistData() {
 
                 $galleryExtraction = function ($piece) use ($data) {
 
+                    $piece['images'] = array_values($piece['images']);
                     $piece['images'] = array_map(function ($imageData) use ($data) {
                         
                         $imageId = $imageData['image'];
