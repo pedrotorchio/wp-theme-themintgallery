@@ -39,12 +39,20 @@ export default class MintFetcher {
 
     async fetch(what, callback, predicate = storeValue => storeValue.length > 0) {
         let data = Store[what] && predicate(Store[what]) && Store[what] || false;
-
+        let raw = null
         if (!data) {
             // has artists stored OR from backend OR fetch
-            const raw = __INITIAL_DATA__[what] || (await this.fetcher.get(`/${what}`));
-            
-            data = callback(raw)
+            try {
+                raw = __INITIAL_DATA__[what] || await this.fetcher.get(`/${what}`);
+
+                if (!raw)
+                    throw "No data received";
+
+            } catch (error) {
+                raw = false
+            }
+
+            data = raw && callback(raw)
             
             Store[what] = data
         }
@@ -71,6 +79,12 @@ class Fetcher {
         return fetch(url, {
             method: 'GET'
         })
+            .then( response => {
+                if(!response.ok)
+                    throw 'error';
+
+                return response
+            })
             .then( data => data.json() )
     }
 }
