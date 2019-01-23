@@ -48,6 +48,8 @@ export default {
 @import '~@/styles/config'
 @import '~media-query-mixins'
 
+section
+    overflow: hidden
 .inner-section
     +md
         display: flex
