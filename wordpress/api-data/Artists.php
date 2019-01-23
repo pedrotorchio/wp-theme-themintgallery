@@ -7,17 +7,13 @@ function editArtistData() {
 
     register_rest_field(
         'artists',
-        'category_names',
+        'category_data',
         array(
             'get_callback' => function($object, $field_name, $request) {
                 
                 $categories = get_the_category( $object['id'] );
-                $names = array_map(function($category) {
-                    return $category->name;
-
-                }, $categories);
                 
-                return $names;
+                return $categories;
            }
         )
     );
