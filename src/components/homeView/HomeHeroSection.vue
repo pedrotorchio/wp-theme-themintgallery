@@ -1,12 +1,13 @@
 <script>
 import LazyImage from 'vue-hoverable-lazy-image'
 import BlockLink from '@/components/BlockLink'
+import Logo from '@/components/Logo'
 import Section from '@/mixins/section-timeline/Timeline'
 import { Expo } from 'gsap'
 export default {
     mixins: [ Section ],
     props: [ 'page' ],
-    components: { LazyImage, BlockLink },
+    components: { Logo, LazyImage, BlockLink },
     data: () => ({
         news: [
             { when: "February 1st", text: "New artists opening" },
@@ -43,13 +44,16 @@ export default {
         .inner-section
             .hero
                 div.text
-                    h2.pretitle
-                        span Art
-                        span +
-                        span Artisan
+                    template( v-if = "false" )
+                        h2.pretitle
+                            span Art
+                            span +
+                            span Artisan
 
-                    h1.title 
-                        span( v-for = "(lt, i) in titleArray" ) {{ lt }}
+                        h1.title 
+                            span( v-for = "(lt, i) in titleArray" ) {{ lt }}
+                    template( v-else )
+                        logo.logo
                     block-link.cta( ref = "cta" text = "Meet Our Talent" :url = "{ path: '/artists' }" )
 
                 lazy-image.img.hang-shadow( ref = "img" :hoverable = "false" :src = "image.large" :src-placeholder = "image.placeholder" )
@@ -64,6 +68,9 @@ export default {
 <style lang="sass" scoped>
 @import '~@/styles/config'
 @import '~media-query-mixins'
+.logo
+    width: 400px
+    margin-bottom: 2em
 section
     +md
         height: calc(100vh - #{$size--header-height})
