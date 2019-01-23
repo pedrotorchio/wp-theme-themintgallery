@@ -1,7 +1,7 @@
 <?php
 /*WordPress Settings API Demo*/
 
-function display_options()
+function display_copyright_options()
 {
     //section name, display name, callback to print description of section, page to which section is attached.
     add_settings_section("copyright_section", "Copyrights", function(){
@@ -30,4 +30,4 @@ function display_options()
 }
 
 //this action is executed after loads its core, after registering all actions, finds out what page to execute and before producing the actual output(before calling any action callback)
-add_action("admin_init", "display_options");
+add_action("admin_init", "display_copyright_options");
