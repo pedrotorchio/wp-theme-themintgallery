@@ -135,7 +135,7 @@ article.ArtistPreview-root
 
 .profile_pic /deep/ .caption
         display: flex
-        justify-content: space-around
+        justify-content: center
         align-content: center
         align-items: center
         flex-direction: row
