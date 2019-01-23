@@ -13,6 +13,8 @@ export function makeBase(model, wpData) {
     
     if (wpData.id)
         model.id = wpData.id
+    if (wpData.category_data)
+        model.categories = wpData.category_data
 
     return model
 }
@@ -68,7 +70,7 @@ export function makeUrl(wpData) {
 }
 export function makeArtist(wpData) {
     let artist = new Artist()
-        // artist = makeBase(artist, wpData)
+        artist = makeBase(artist, wpData)
         artist.name = wpData.title.rendered
         artist.bio = wpData.acf.bio
         artist.slug = wpData.slug || slugify (artist.name, { lower: true })

@@ -49,6 +49,10 @@ export default {
             } else return false;
 
             return [ img1, img2 ]
+        },
+        categories() {
+            const categories = this.artist.categories;
+            return categories;
         }
     }
 }
@@ -57,6 +61,7 @@ export default {
     article
         div.imgs
             lazy-image.profile_pic( :src = "profilePicture.medium" :src-placeholder = "profilePicture.placeholder" )
+                span.hover-phantom-effect( v-if = "categories" v-for = "(category, i) in categories" :key = "i") {{ `#${category.cat_name}` }}
             div.small-imgs( v-if = "thumbnails" )
                 lazy-image( v-if = "thumbnails[0]" :src = "thumbnails[0].thumbnail" :src-placeholder = "thumbnails[0].placeholder" )
                 lazy-image( v-if = "thumbnails[1]"  :src = "thumbnails[1].thumbnail" :src-placeholder = "thumbnails[1].placeholder" )
@@ -127,5 +132,20 @@ article.ArtistPreview-root
         +md
             width: $sm-img-size
             padding-bottom: calc(100% - #{$space/2})
+
+.profile_pic /deep/ .caption
+        display: flex
+        justify-content: space-around
+        align-content: center
+        align-items: center
+        flex-direction: row
+        flex-wrap: wrap
+        font-size: $size--font-text
+
+        span
+            width: auto
+            margin: 10px
+            position: relative
+            flex: 0 0 auto
 
 </style>
