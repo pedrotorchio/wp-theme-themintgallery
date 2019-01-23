@@ -69,7 +69,9 @@ export default {
 @import '~@/styles/config'
 @import '~media-query-mixins'
 .logo
-    width: 400px
+    width: 100%
+    +md
+        width: 400px
     margin-bottom: 2em
 section
     +md
