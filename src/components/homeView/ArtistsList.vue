@@ -57,10 +57,12 @@ li
     +sm
         $margin: 1em
         margin: 0 $margin
+        margin-bottom: $margin
         flex: 0 0 calc(#{100% / 3} - #{$margin * 2})
     +md
         $margin: 2em
         margin: 0 $margin
+        margin-bottom: $margin
         flex: 0 0 calc(#{100% / 3} - #{$margin * 2})
 .img
     width: 100%
