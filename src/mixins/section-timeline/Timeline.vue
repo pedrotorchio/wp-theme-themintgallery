@@ -8,10 +8,7 @@ export default {
     }),
     methods: {
         animation() {
-            let { scrollTrigger, scrollOffset, scrollEvent, ...timelineParameters, automatic } = this.getTimelineParameters();
-
-            if (automatic === false)
-                return;
+            let { scrollTrigger, scrollOffset, scrollEvent, ...timelineParameters } = this.getTimelineParameters();
 
             // if scroll animation is NOT OFF
             if (scrollTrigger !== false) {
@@ -52,7 +49,8 @@ export default {
         animate( timeline ){} // overload
     },
     mounted() {
-        setTimeout(this.animation, 0);
+        if (this.getTimelineParameters().automatic !== false);
+            setTimeout(this.animation, 0);
     }
 }
 </script>
