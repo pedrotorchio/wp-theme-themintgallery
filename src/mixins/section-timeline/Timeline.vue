@@ -8,7 +8,10 @@ export default {
     }),
     methods: {
         animation() {
-            let { scrollTrigger, scrollOffset, scrollEvent, ...timelineParameters } = this.getTimelineParameters();
+            let { scrollTrigger, scrollOffset, scrollEvent, ...timelineParameters, automatic } = this.getTimelineParameters();
+
+            if (automatic === false)
+                return;
 
             // if scroll animation is NOT OFF
             if (scrollTrigger !== false) {
