@@ -26,6 +26,11 @@ export default {
         }
     },
     methods: {
+        getTimelineParameters() {
+            return {
+                delay: .5
+            }
+        },
         animate( timeline ) {
             
             timeline
