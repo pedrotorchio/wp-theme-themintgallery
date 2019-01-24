@@ -49,7 +49,7 @@ export default {
         animate( timeline ){} // overload
     },
     mounted() {
-        if (this.getTimelineParameters().automatic !== false);
+        if (this.getTimelineParameters().automatic !== false)
             setTimeout(this.animation, 0);
     }
 }
