@@ -28,7 +28,8 @@ export default {
     methods: {
         getTimelineParameters() {
             return {
-                delay: .5
+                delay: .2,
+                automatic: false
             }
         },
         animate( timeline ) {
@@ -40,6 +41,12 @@ export default {
                 }, .2, .5)
                 .addCallback(() => this.$refs['cta'].$el.classList.add('shown'), 1)
                 
+        }
+    },
+    watch: {
+        "$loading.state": function(state) {
+            if (!state)
+                this.animation();
         }
     }
 }
