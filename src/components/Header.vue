@@ -23,6 +23,11 @@ export default {
             return new URL(absolute).pathname
         }
     },
+    watch: {
+        $route() {
+            this.toggled = false
+        }
+    }
 }
 </script>
 <template lang="pug">
