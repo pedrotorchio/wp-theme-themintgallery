@@ -22,7 +22,7 @@ export default {
         getRelativePath(absolute){
             return new URL(absolute).pathname
         }
-    }
+    },
 }
 </script>
 <template lang="pug">
@@ -37,7 +37,7 @@ export default {
                     span.middle
                     span.bottom
                 nav#main-menu( :class = "{ toggled }" )
-                    ul.menu
+                    ul.menu.responsive
                         li.title( v-for = "(parent, i) in menuStructure" :key = "parent.ID" )
                             router-link( :to = "getRelativePath(parent.url)" ) {{ parent.title }}
 
