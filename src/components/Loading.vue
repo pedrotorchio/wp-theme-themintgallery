@@ -50,7 +50,17 @@ main
     &.shown, &.removing
         opacity: 1 !important
     
+.logo /deep/ svg
+    transform-origin: center
+    transform: scale(1)
+    animation: grow 10s alternate
 
-
+@keyframes grow
+    0%
+        opacity: .2
+        transform: scale(.2)
+    100%
+        opacity: 1
+        transform: scale(1)
 
 </style>
