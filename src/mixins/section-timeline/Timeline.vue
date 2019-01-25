@@ -24,7 +24,7 @@ export default {
 
             this.animationTimeline = new TimelineMax(parameters);
             this.animate(this.animationTimeline);
-
+            
             // scroll event
             if (scrollTrigger) {
                 // if not defined, set to -100
