@@ -23,12 +23,14 @@ export default {
         .then(page => {
           this.page = this.formatPage(page)
           this.$loading.add(60)
-        });
+        })
+        .catch(location.reload);
       this.$fetcher.getArtists()
         .then(artists => {
           this.artists = artists
           this.$loading.add(40)
-        });
+        })
+        .catch(location.reload);
     },
     formatPage(page) {
       page.data.gallery_featured_image = TypeMaker.makeImage(page.data.gallery_featured_image);

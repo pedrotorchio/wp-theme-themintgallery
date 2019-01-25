@@ -42,15 +42,10 @@ export default class MintFetcher {
         let raw = null
         if (!data) {
             // has artists stored OR from backend OR fetch
-            try {
-                raw = __INITIAL_DATA__[what] || await this.fetcher.get(`/${what}`);
+            raw = __INITIAL_DATA__[what] || await this.fetcher.get(`/${what}`);
 
-                if (!raw)
-                    throw "No data received";
-
-            } catch (error) {
-                raw = false
-            }
+            if (!raw)
+                throw "No data received";
 
             data = raw && callback(raw)
             
@@ -81,7 +76,7 @@ class Fetcher {
         })
             .then( response => {
                 if(!response.ok)
-                    throw 'error';
+                    throw new Error('', res.status);
 
                 return response
             })
