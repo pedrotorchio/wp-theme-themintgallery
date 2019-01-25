@@ -15,8 +15,13 @@ export default {
             const delay = .1
             const show = el => el.classList.add('shown')
             const stag = (el, i) => setTimeout(() => show(el), i * delay * 1000 )
+            const items = this.$refs['items']
+
+            if (!items)
+                return;
+
             timeline
-                .addCallback(() => this.$refs['items'].forEach(stag))
+                .addCallback(() => items.forEach(stag))
         }
     }
 }
