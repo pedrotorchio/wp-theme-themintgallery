@@ -5,6 +5,7 @@ import Logo from '@/components/Logo'
 import Section from '@/mixins/section-timeline/Timeline'
 import { Expo } from 'gsap'
 export default {
+    name: "HomeHero",
     mixins: [ Section ],
     props: [ 'page' ],
     components: { Logo, LazyImage, BlockLink },
@@ -44,9 +45,12 @@ export default {
         }
     },
     watch: {
-        "$loading.state": function(state) {
-            if (!state)
-                this.animation();
+        "$loading.state": {
+            immediate: true,
+            handler(state) {
+                if (!state)
+                    setTimeout(this.animation);
+            }
         }
     }
 }
