@@ -30,7 +30,7 @@ export default {
     nav.social( :class = "{wires}" )
         ul.menu
             li( v-for = "(media, i) in data" :key = "media.ID" )
-                a( :href = "media.url" )
+                a( :href = "media.url" target="_blank" )
                     svgicon( :name = "media.title" v-bind = "svgAttrs" )
 </template>
 
