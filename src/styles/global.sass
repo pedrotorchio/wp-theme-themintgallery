@@ -36,6 +36,12 @@ ul.menu
     font-size: $size--font-text
     flex-direction: row
 
+    &.responsive
+        flex-direction: column
+
+        +md
+            flex-direction: row
+
     li
         $size: $size--font-text * 2
         margin: $size/4
@@ -72,11 +78,11 @@ ul.menu
             li
                 text-transform: none
                 font-weight: 100
-
-        &:hover > ul
-            opacity: 1
-            visibility: visible
-            transform: translateY(0)
+        +md
+            &:hover > ul
+                opacity: 1
+                visibility: visible
+                transform: translateY(0)
 
 
 section, .section
