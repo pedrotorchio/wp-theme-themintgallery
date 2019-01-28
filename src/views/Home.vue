@@ -1,12 +1,13 @@
 <script>
 import TypeMaker from '@/plugins/mint-fetcher/TypeMaker'
-import HomeHeroSection from '@/components/homeView/HomeHeroSection'
-import Logo from '@/components/Logo'
-import Quote from '@/components/Quote'
-import ArtistsList from '@/components/homeView/ArtistsList'
-import GallerySection from '@/components/homeView/GallerySection'
-import AcquireSection from '@/components/homeView/AcquireSection'
-import JoinSection from '@/components/homeView/JoinSection'
+
+const HomeHeroSection = ()=>import(/* webpackChunkName: "HomeHero" */ '@/components/homeView/HomeHeroSection.vue')
+const Logo = ()=>import(/* webpackChunkName: "Logo" */ '@/components/Logo')
+const Quote = ()=>import(/* webpackChunkName: "Quote" */ '@/components/Quote')
+const ArtistsList = ()=>import(/* webpackChunkName: "ArtistsList" */ '@/components/homeView/ArtistsList')
+const GallerySection = ()=>import(/* webpackChunkName: "Gallery" */ '@/components/homeView/GallerySection')
+const AcquireSection = ()=>import(/* webpackChunkName: "Acquire" */ '@/components/homeView/AcquireSection')
+const JoinSection = ()=>import(/* webpackChunkName: "Join" */'@/components/homeView/JoinSection')
 
 export default {
   name: "home",
@@ -22,13 +23,11 @@ export default {
       this.$fetcher.getPage('home')
         .then(page => {
           this.page = this.formatPage(page)
-          this.$loading.add(60)
         })
         .catch(location.reload);
       this.$fetcher.getArtists()
         .then(artists => {
           this.artists = artists
-          this.$loading.add(40)
         })
         .catch(location.reload);
     },
@@ -37,6 +36,9 @@ export default {
       page.data.shop_featured_image = TypeMaker.makeImage(page.data.shop_featured_image);
 
       return page
+    },
+    initiallyRendered() {
+      this.$loading.add(100)
     }
   },
   created() {
@@ -47,7 +49,7 @@ export default {
 
 <template lang="pug">
   div
-      home-hero-section#hero( v-if = "page" :page = "page" )
+      home-hero-section#hero( v-if = "page" :page = "page" @mounted = "initiallyRendered" )
       artists-list( v-if = "artists" :artists = "artists")
       template( v-if = "page")
         quote.quote( :quote = "page.quotes[0]" white )

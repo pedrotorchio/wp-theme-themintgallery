@@ -52,6 +52,9 @@ export default {
                     setTimeout(this.animation);
             }
         }
+    },
+    mounted() {
+        this.$nextTick( () => this.$emit('mounted') );
     }
 }
 </script>
