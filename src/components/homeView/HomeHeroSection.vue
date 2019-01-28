@@ -48,6 +48,9 @@ export default {
             if (!state)
                 this.animation();
         }
+    },
+    mounted() {
+        this.$nextTick( () => this.$emit('mounted') );
     }
 }
 </script>
