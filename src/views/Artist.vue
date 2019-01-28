@@ -7,7 +7,10 @@ import ThemedGallerySection from '@/components/artistView/ThemedGallerySection';
 import MiddleNavigation from '@/components/artistView/MiddleNavigation';
 import AdditionalSection from '@/components/artistView/AdditionalSection';
 
+import Page from '@/mixins/Page'
+
 export default {
+    extends: Page,
     name: 'Artist',
     components: { HeroSection, BioSection, MiddleNavigation, GallerySection, ThemedGallerySection, AdditionalSection },
     props: {
@@ -58,8 +61,23 @@ export default {
         async fetchData() {
             this.$loading.set(true)
             this.artist = null
-            this.artist = await this.$fetcher.getArtist(this.slug)
-            this.$loading.add(100)
+            this.$fetcher.getArtist(this.slug)
+                .then(artist => {
+                    this.onArtistLoad(artist)
+                    this.$loading.add(100)
+                })
+            
+        },
+        onArtistLoad(artist) {
+            this.artist = artist;
+
+            const title = `Artist ${artist.name}`
+            const description = `${title}. ${artist.description}`
+            const keywords = ['artist', ...artist.categories.map(cat => cat.cat_name)]
+            
+            this.setTitle(title)
+            this.setMeta('description', description)
+            this.setMeta('keywords', keywords)
         }
     },
     watch: {

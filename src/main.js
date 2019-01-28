@@ -14,6 +14,15 @@ import 'viewerjs/dist/viewer.css'
 import Viewer from 'v-viewer'
 Vue.use(Viewer)
 
+import { setTitle, setMeta, addMeta } from '@/assets/js/DocumentScripts'
+Vue.mixin({
+  methods: {
+    setTitle,
+    setMeta,
+    addMeta
+  }
+})
+
 import SmoothScroll from 'smooth-scroll'
 new SmoothScroll('a[href*="#"]', {
   speed: 200,

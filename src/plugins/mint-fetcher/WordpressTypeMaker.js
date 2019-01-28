@@ -21,7 +21,11 @@ export function makeBase(model, wpData) {
 export function makePage(wpData) {
     let page = new Page()
         page = makeBase(page, wpData)
+        
         page.title = wpData.title.rendered
+        page.description = wpData.acf.description
+        if (wpData.acf.keywords)
+            page.keywords = makeKeywords(wpData.acf.keywords);
         page.excerpt = wpData.excerpt
         if (wpData.featured_image)
             page.featuredImage = makeImage(wpData.featured_image)
@@ -47,6 +51,9 @@ export function makeSlide(wpData) {
             slide.featuredImage = makeImage(wpData.featured_image)
 
     return slide
+}
+export function makeKeywords(wpData) {
+    return wpData.split(',').map(wrd => wrd.trim())
 }
 export function makeQuote(wpData) {
     let quote = new Quote()
@@ -74,6 +81,12 @@ export function makeArtist(wpData) {
         artist.name = wpData.title.rendered
         artist.bio = wpData.acf.bio
         artist.slug = wpData.slug || slugify (artist.name, { lower: true })
+
+        if (wpData.acf.keywords)
+            artist.keywords = makeKeywords(wpData.acf.keywords);
+
+        if (wpData.acf.description)
+            artist.description = wpData.acf.description
 
         if (wpData.CFS.additional)
             artist.additionalSections = wpData.CFS.additional

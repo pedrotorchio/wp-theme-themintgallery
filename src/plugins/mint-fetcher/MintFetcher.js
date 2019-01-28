@@ -1,5 +1,6 @@
 import TypeMaker from './TypeMaker';
 import Store from './store';
+import { setMeta, setTitle } from '@/assets/js/DocumentScripts';
 
 window.Store = Store
 export default class MintFetcher {
@@ -31,8 +32,19 @@ export default class MintFetcher {
 
         return page
     }
-    async getPage(slug) {
+    async getPage(slug, options = {}) {
         const page = await this.fetch( `pages?slug=${slug}`, raw => TypeMaker.makePage(raw[0]) )
+
+        let title = page.title,
+            description = page.description,
+            keywords = page.keywords
+
+        if (options.extractTitle)
+            title = options.extractTitle(page)
+
+        setTitle(title);
+        setMeta('description', description);
+        setMeta('keywords', keywords);
 
         return page
     }

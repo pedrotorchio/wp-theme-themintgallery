@@ -1,27 +1,48 @@
 <script>
 import Preview from '@/components/ArtistPreview'
+import Page from '@/mixins/Page'
 export default {
     name: 'Artists',
+    extends: Page,
     components: { Preview },
     data: () => ({
-        artists: []
+        artists: [],
+        page: null
     }),
     methods: {
         async fetchData() {
             this.$loading.set(true)
-            this.artists = await this.$fetcher.getArtists()
-            this.$loading.add(100)
+            this.$fetcher.getPage('artists')
+                .then( page => this.page = page )
+            this.$fetcher.getArtists()
+                .then( artists => {
+                    this.onArtistsLoad(artists)
+                    this.$loading.add(100)
+                })
         },
         getArtistRoute(artist) {
             return { 
                 name: 'Artist',
                 params: { slug: artist.slug }
             }
+        },
+        onArtistsLoad(artists) {
+            this.artists = artists;
+
+            let catNames = {}
+            artists
+                .map( artist => artist.categories)
+                .flat()
+                .forEach( cat => catNames[cat.slug] = cat.cat_name)
+            
+            const cats = Object.values(catNames)
+            
+            this.addMeta('keywords', cats, (n, c) => [...n, ...c]);
         }
     },
     created() {
         this.fetchData();
-    }
+    },
 }
 </script>
 <template lang="pug">
