@@ -96,7 +96,7 @@ export default {
         template( v-if = "artist" )
             hero-section( :artist = "artist" )
             bio-section.inner-section( :artist = "artist" )
-            middle-navigation.inner-section( :items = "allGalleries" )
+            middle-navigation.mid-nav.inner-section( :items = "allGalleries" )
             gallery-section#gallery.inner-section( v-if = "hasGallery" :gallery = "artist.gallery" )
             themed-gallery-section.inner-section( v-for = "(gallery, i) in artist.themedGalleries" :key = "`themed-${i}`" 
                 :gallery = "gallery"
@@ -107,7 +107,8 @@ export default {
                 
 </template>
 <style lang="sass" scoped>
-
+.mid-nav
+    clear: both
 .bio
     margin: 100px 0
 h2
